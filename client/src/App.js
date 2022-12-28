@@ -16,6 +16,12 @@ const App = () => {
         },
       });
 
+      App.get('/api/HttpTrigger2', (req, res) => {
+        res.json({
+          text: 'Hello from the API',
+        });
+      });
+
       if (!response.ok) {
         throw new Error(`Error! status: ${response.status}`);
       }
