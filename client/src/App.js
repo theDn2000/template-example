@@ -1,65 +1,43 @@
-import {useState} from 'react';
+import logo from './flexlogo.svg';
+import './App.css';
 
-const App = () => {
-  const [data, setData] = useState({data: []});
-  const [isLoading, setIsLoading] = useState(false);
-  const [err, setErr] = useState('');
-
-  const handleClick = async () => {
-    setIsLoading(true);
-
-    try {
-      const response = await fetch('/api/HttpTrigger2', {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json',
-        },
-      });
-
-      App.get('/api/HttpTrigger2', (req, res) => {
-        res.json({
-          text: 'Hello from the API',
-        });
-      });
-
-      if (!response.ok) {
-        throw new Error(`Error! status: ${response.status}`);
-      }
-
-      const result = await response.json();
-
-      console.log('result is: ', JSON.stringify(result, null, 4));
-
-      setData(result);
-    } catch (err) {
-      setErr(err.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  console.log(data);
-
+function App() {
   return (
-    <div>
-      {err && <h2>{err}</h2>}
+    <div className="App">
+      
+      <header className="App-header">
+      <img src={logo} className="App-logo" alt="logo" />
+      <script src=
+        "https://www.google.com/recaptcha/api.js" async defer />
+        
+       
+        <form class="login" action="action.php" method="post">
 
-      <button onClick={handleClick}>Fetch data</button>
-
-      {isLoading && <h2>Loading...</h2>}
-
-      {data.data.map(person => {
-        return (
-          <div key={person.id}>
-            <h2>{person.email}</h2>
-            <h2>{person.first_name}</h2>
-            <h2>{person.last_name}</h2>
-            <br />
-          </div>
-        );
-      })}
+        <div class="login__field">
+					<i class="login__icon fas fa-user"></i>
+					<input type="text" name = "email" class="login__input" placeholder="Email" />
+				</div>
+          
+		
+        <div  class="g-recaptcha" data-sitekey="6LcqxFgiAAAAAG_dX-8lTyY1RQcrARq0ArGbKHSj"  />
+        <button class="button login__submit">
+					<span class="button__text" name="submit_btn" type="submit"> Forgot Password </span>
+					<i class="button__icon fas fa-chevron-right"></i>
+				</button>	
+        </form>
+        
+        
+        <a
+          className="App-link"
+          href="https://www.flexxible.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          About Flexxible
+        </a>
+      </header>
     </div>
   );
-};
+}
 
 export default App;

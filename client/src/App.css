@@ -7,14 +7,22 @@
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+.App-logo {
+  position: static;
+  width: 20vw;
+  
+}
+.g-recaptcha {
+	padding: 20px 0px;	
+	position: relative;	
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #171717;
+  background-image:url(./img/bck.svg) ;
+  background-repeat: no-repeat;
+  background-position: bottom right;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -25,7 +33,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #f35623  ;
 }
 
 @keyframes App-logo-spin {
@@ -36,3 +44,124 @@
     transform: rotate(360deg);
   }
 }
+
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.login__field {
+	padding: 20px 0px;
+
+	position: relative;	
+}
+
+.login__icon {
+	position: absolute;
+	top: 30px;
+	color: #7875B5;
+}
+
+.login__input {
+	border: none;
+	border-bottom: 2px solid #D1D1D4;
+	background: none;
+	padding: 10px;
+	padding-left: 24px;
+	font-weight: 700;
+	width: 75%;
+	transition: .2s;
+}
+
+.login__input:active,
+.login__input:focus,
+.login__input:hover {
+	outline: none;
+	border-bottom-color: #6A679E;
+}
+
+
+
+.login__submit:active,
+.login__submit:focus,
+.login__submit:hover {
+	border-color: #f35623;
+	outline: none;
+}
+
+
+
+
+input[type="text"] {
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px;
+    font-family: "Times New Roman", Times, serif;
+    font-size: larger;
+    color: white;
+}
+.login__submit {
+	background: #fff;
+	font-size: 14px;
+	
+	padding: 16px 20px;
+	
+	border: 1px solid #D4D3E8;
+	text-transform: uppercase;
+  
+	font-weight: 700;
+	display: flex;
+	align-items: center;
+	width: 100%;
+	color: black;
+	box-shadow: 0px 2px 2px #f35623;
+  
+	cursor: pointer;
+	transition: .2s;
+}
+
+button {
+    border-radius: 5px;
+    padding: 10px;
+    color: #fff;
+    background-color: black;
+    border-color: black;
+    font-weight: bolder;
+    align-items: center !important;
+    text-align: center !important;
+    cursor: pointer;
+    margin-bottom: 10vh;
+}
+    
+button:hover {
+    text-decoration: none;
+    color: black;
+    background-color: #f35623;
+    border-color: #f35623;
+}
+    
+
+
+
+
+
+
+
+
+
+
+
