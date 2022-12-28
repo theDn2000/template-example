@@ -19,7 +19,7 @@ function App() {
 				</div>
           
 		
-        <div  class="g-recaptcha" data-sitekey="6LcqxFgiAAAAAG_dX-8lTyY1RQcrARq0ArGbKHSj"  />
+        <div  class="g-recaptcha" data-sitekey="6LeszrQjAAAAAOe0tVYAt-DTNixnqPkbpeWUo9tt"  />
         <button class="button login__submit">
 					<span class="button__text" name="submit_btn" type="submit"> Forgot Password </span>
 					<i class="button__icon fas fa-chevron-right"></i>
