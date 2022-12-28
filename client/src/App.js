@@ -1,16 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+import Home from './Home';
+import About from './About';
+import Contact from './Contact';
+import './App.css';
 
-function App() {
-  const [data, setData] = useState('');
-
-  useEffect(() => {
-    (async function () {
-      const { text } = await( await fetch(`/api/message`)).json();
-      setData(text);
-    })();
-  });
-
-  return <div>{data}</div>;
+class App extends Component {
+  render() {
+    return (
+      <Router>
+        <div className='App'>
+          <h2>Prueba de static web app para reseteo de password</h2>
+          <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <ul className="navbar-nav mr-auto">
+              <li><Link to={'/'} className="nav-link"> Comprobar usuario </Link></li>
+              <li><Link to={'/contact'} className="nav-link">Contact</Link></li>
+              <li><Link to={'/about'} className="nav-link">About</Link></li>
+            </ul>
+          </nav>
+          <hr />
+          <Routes>
+            <Route exact path='/' element={<Home />} />
+            <Route path='/contact' element={<Contact />} />
+            <Route path='/about' element={<About />} />
+          </Routes>
+        </div>
+      </Router>
+    );
+  }
 }
 
 export default App;
+
