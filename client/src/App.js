@@ -9,7 +9,7 @@ const App = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('api/HttpTrigger2', {
+      const response = await fetch('api/HttpTrigger1', {
         method: 'GET',
         headers: {
           Accept: 'application/json',
