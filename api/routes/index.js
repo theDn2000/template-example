@@ -7,3 +7,8 @@ router.get('/', function(req, res, next) {
 });
 
 module.exports = router;
+
+/* GET Contact page. */
+router.get('/contact', function(req, res, next) {
+  res.render('contact', { title: 'Contact' });
+});
