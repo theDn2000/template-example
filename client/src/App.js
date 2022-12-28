@@ -9,8 +9,8 @@ const App = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('https://reqres.in/api/users', {
-        method: 'GET',
+      const response = await fetch('api/httptrigger2', {
+        method: 'POST',
         headers: {
           Accept: 'application/json',
         },
