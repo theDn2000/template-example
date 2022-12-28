@@ -13,7 +13,7 @@ class App extends Component {
           <h2>Prueba de static web app para reseteo de password</h2>
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <ul className="navbar-nav mr-auto">
-              <li><Link to={'/'} className="nav-link"> Home </Link></li>
+              <li><Link to={'/'} className="nav-link"> Comprobar usuario </Link></li>
               <li><Link to={'/contact'} className="nav-link">Contact</Link></li>
               <li><Link to={'/about'} className="nav-link">About</Link></li>
             </ul>
