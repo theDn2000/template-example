@@ -10,7 +10,7 @@ class App extends Component {
     return (
       <Router>
         <div className='App'>
-          <h2>Welcome to React Router Tutorial</h2>
+          <h2>Prueba de static web app para reseteo de password</h2>
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <ul className="navbar-nav mr-auto">
               <li><Link to={'/'} className="nav-link"> Home </Link></li>
