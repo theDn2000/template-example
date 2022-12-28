@@ -9,8 +9,8 @@ const App = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('api/httptrigger2', {
-        method: 'POST',
+      const response = await fetch('api/HttpTrigger2', {
+        method: 'GET',
         headers: {
           Accept: 'application/json',
         },
