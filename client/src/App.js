@@ -1,7 +1,31 @@
 import logo from './flexlogo.svg';
 import './App.css';
+import axios from 'axios';
+import {useState} from 'react';
+
+
+
+
+
+async function handleSubmit (event) {
+  event.preventDefault();
+
+}
+
+async function SendRequest (event) {
+  event.preventDefault();
+  console.log("res");
+  axios.get('https://testpasswordfunctions.azurewebsites.net/api/HttpTrigger2?clientId=apim-testpasswordAPI')
+  .then((res)=>{
+    console.log(res);
+   
+  })
+}
 
 function App() {
+
+
+
   return (
     <div className="App">
       
@@ -11,7 +35,7 @@ function App() {
         "https://www.google.com/recaptcha/api.js" async defer />
         
        
-        <form class="login" action="action.php" method="post">
+        <form class="login" onSubmit={handleSubmit}  method="post">
 
         <div class="login__field">
 					<i class="login__icon fas fa-user"></i>
@@ -20,8 +44,8 @@ function App() {
           
 		
         <div  class="g-recaptcha" data-sitekey="6LeszrQjAAAAAOe0tVYAt-DTNixnqPkbpeWUo9tt"  />
-        <button class="button login__submit">
-					<span class="button__text" name="submit_btn" type="submit"> Forgot Password </span>
+        <button class="button login__submit"  onClick={SendRequest} >
+					<span class="button__text" name="submit_btn" > Forgot Password </span>
 					<i class="button__icon fas fa-chevron-right"></i>
 				</button>	
         </form>
@@ -33,7 +57,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          About Flexxible
+          
         </a>
       </header>
     </div>
