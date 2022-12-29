@@ -28,7 +28,7 @@ async function SendRequest (event) {
     console.log(res);
    
   })
-  
+}
 
 function App() {
 
