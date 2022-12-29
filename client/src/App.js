@@ -12,15 +12,23 @@ async function handleSubmit (event) {
 
 }
 
+// Send a get request including the token in the header
+const token = "2f8f065441ae4a80ab23f6b3cd9837b4" // Azure API Management subscription key
 async function SendRequest (event) {
   event.preventDefault();
   console.log("res");
-  axios.get('https://testpasswordfunctions.azurewebsites.net/api/HttpTrigger2?clientId=apim-testpasswordAPI')
+  //axios.get('https://testpasswordfunctions.azurewebsites.net/api/HttpTrigger2?clientId=apim-testpasswordAPI'),
+  axios.get('https://testpasswordapi.azure-api.net/testpasswordfunctions/HttpTrigger2'),
+  {
+    headers: {
+      'Ocp-Apim-Subscription-Key': token
+    }
+  }
   .then((res)=>{
     console.log(res);
    
   })
-}
+  
 
 function App() {
 
