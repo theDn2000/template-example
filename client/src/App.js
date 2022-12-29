@@ -18,12 +18,14 @@ async function SendRequest (event) {
   event.preventDefault();
   console.log("res");
   //axios.get('https://testpasswordfunctions.azurewebsites.net/api/HttpTrigger2?clientId=apim-testpasswordAPI'),
-  axios.get('https://testpasswordapi.azure-api.net/testpasswordfunctions/HttpTrigger2'),
-  {
-    headers: {
+
+  const config = {
+    headers:{
       'Ocp-Apim-Subscription-Key': token
     }
-  }
+  };
+
+  axios.get('https://testpasswordapi.azure-api.net/testpasswordfunctions/HttpTrigger2',config)
   .then((res)=>{
     console.log(res);
    
