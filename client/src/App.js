@@ -1,7 +1,7 @@
 import logo from './flexlogo.svg';
 import './App.css';
 import axios from 'axios';
-
+import React, { useState } from 'react';
 
 
 
@@ -13,27 +13,31 @@ async function handleSubmit (event) {
 }
 
 // Send a get request including the token in the header
-async function SendRequest (event) {
-  const token = "2f8f065441ae4a80ab23f6b3cd9837b4" // Azure API Management subscription key
-  event.preventDefault();
-  console.log("res");
-  //axios.get('https://testpasswordfunctions.azurewebsites.net/api/HttpTrigger2?clientId=apim-testpasswordAPI'),
 
-  const config = {
-    headers:{
-      'Ocp-Apim-Subscription-Key': token
-    }
-  };
-
-  axios.get('https://testpasswordapi.azure-api.net/testpasswordfunctions/HttpTrigger2',config)
-  .then((res)=>{
-    console.log(res);
-   
-  })
-}
 
 function App() {
 
+  const [buttonText, setButtonText] = useState('Click');
+
+
+  async function SendRequest (event) {
+    const token = "2f8f065441ae4a80ab23f6b3cd9837b4" // Azure API Management subscription key
+    event.preventDefault();
+    console.log("res");
+    //axios.get('https://testpasswordfunctions.azurewebsites.net/api/HttpTrigger2?clientId=apim-testpasswordAPI'),
+  
+    const config = {
+      headers:{
+        'Ocp-Apim-Subscription-Key': token
+      }
+    };
+  
+    axios.get('https://testpasswordapi.azure-api.net/testpasswordfunctions/HttpTrigger3',config)
+    .then((res)=>{
+      console.log(res);
+      setButtonText(res);
+    })
+  }
 
 
   return (
