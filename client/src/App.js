@@ -17,9 +17,15 @@ async function handleSubmit (event) {
 
 function App() {
 
-  const [buttonText, setButtonText] = useState('');
+  const [pokeid, setButtonText] = useState('');
+  const [message, setMessage] = useState('');
 
+  const handleChange = event => {
+    setMessage(event.target.value);
 
+    
+  };
+  
   async function SendRequest (event) {
     const token = "2f8f065441ae4a80ab23f6b3cd9837b4" // Azure API Management subscription key
     event.preventDefault();
@@ -27,6 +33,7 @@ function App() {
     //axios.get('https://testpasswordfunctions.azurewebsites.net/api/HttpTrigger2?clientId=apim-testpasswordAPI'),
   
     const config = {
+      params: { mail: message },
       headers:{
         'Ocp-Apim-Subscription-Key': token
       }
@@ -53,7 +60,7 @@ function App() {
 
         <div class="login__field">
 					<i class="login__icon fas fa-user"></i>
-					<input type="text" name = "email" class="login__input" placeholder="Email" />
+					<input type="text" name = "email" class="login__input" onChange={handleChange} value={message} placeholder="Email" />
 				</div>
           
 		
@@ -71,7 +78,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          {buttonText}
+          {pokeid}
         </a>
       </header>
     </div>
