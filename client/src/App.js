@@ -17,7 +17,7 @@ async function handleSubmit (event) {
 
 function App() {
 
-  const [buttonText, setButtonText] = useState('Click');
+  const [buttonText, setButtonText] = useState('');
 
 
   async function SendRequest (event) {
@@ -71,7 +71,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          
+          {buttonText}
         </a>
       </header>
     </div>
