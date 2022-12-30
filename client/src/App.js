@@ -47,7 +47,9 @@ function App() {
     .then((res)=>{
       console.log(res);
       setButtonText(res.data);
-    })
+    },(error) => {
+      setButtonText('no existe ese pokemon');
+    });
   }
 
 
