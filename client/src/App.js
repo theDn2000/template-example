@@ -46,7 +46,7 @@ function App() {
     axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/HttpTrigger3',data,config)
     .then((res)=>{
       console.log(res);
-      setButtonText(res);
+      setButtonText(res.data);
     })
   }
 
