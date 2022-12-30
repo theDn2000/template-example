@@ -32,14 +32,18 @@ function App() {
     console.log("res");
     //axios.get('https://testpasswordfunctions.azurewebsites.net/api/HttpTrigger2?clientId=apim-testpasswordAPI'),
   
+    const data = {
+      mail: message
+      
+    };
+
     const config = {
-      params: { mail: message },
       headers:{
         'Ocp-Apim-Subscription-Key': token
       }
     };
   
-    axios.get('https://testpasswordapi.azure-api.net/testpasswordfunctions/HttpTrigger3',config)
+    axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/HttpTrigger3',data,config)
     .then((res)=>{
       console.log(res);
       setButtonText(res);
