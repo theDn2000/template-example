@@ -43,12 +43,18 @@ function App() {
       }
     };
   
-    axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/HttpTrigger3',data,config)
+    axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/comprobarusuario',data,config)
     .then((res)=>{
       console.log(res);
-      setButtonText(res.data);
+      if (res.data === "1"){
+        setButtonText("Usuario verificado, seleccione el método de recuperación");
+      }
+      else{
+        setButtonText("Usuario no verificado, correo no registrado o sin disponibilidad de esta función");
+      }
+      //setButtonText("Su ID es: "+ res.data);
     },(error) => {
-      setButtonText('no existe ese pokemon');
+      setButtonText('Usuario no verificado, correo no registrado o sin disponibilidad de esta función');
     });
   }
 
