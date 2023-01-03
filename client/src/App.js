@@ -46,7 +46,7 @@ function App() {
     axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/comprobarusuario',data,config)
     .then((res)=>{
       console.log(res);
-      if (res.data === "1"){
+      if (res.data === 1){
         setButtonText("Usuario verificado, seleccione el método de recuperación");
       }
       else{
