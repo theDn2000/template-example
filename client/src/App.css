@@ -14,8 +14,11 @@
   
 }
 .g-recaptcha {
-	padding: 20px 0px;	
-	position: relative;	
+  margin: auto;
+  width: 50%;
+  position: relative;	
+  padding-bottom: 50px;
+  
 }
 
 .App-header {
@@ -85,6 +88,22 @@
 	font-weight: 700;
 	width: 75%;
 	transition: .2s;
+}
+
+
+.login__selector {
+	border: none;
+  color: white;
+  background-color: #171717 !important; 
+	border-bottom: 2px solid #D1D1D4;
+	background: none;
+	padding: 10px;
+	padding-left: 24px;
+	font-weight: 700;
+	width: 100%;
+	transition: .2s;
+  border-radius: 5px;
+  
 }
 
 .login__input:active,

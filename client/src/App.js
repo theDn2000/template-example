@@ -18,6 +18,9 @@ async function handleSubmit (event) {
 function App() {
 
   const [pokeid, setButtonText] = useState('');
+  
+  // pone invisible el segundo formulario
+  const [primerForm, setFormVisible] = useState('text'); // pone visible el segundo formulario
   const [message, setMessage] = useState('');
 
   const handleChange = event => {
@@ -26,6 +29,11 @@ function App() {
     
   };
   
+  async function changeVis(type) {
+    
+    var segundoForm = document.getElementById('segundoForm');
+    segundoForm.style.visibility = type;
+  }
   async function SendRequest (event) {
     const token = "2f8f065441ae4a80ab23f6b3cd9837b4" // Azure API Management subscription key
     event.preventDefault();
@@ -47,7 +55,9 @@ function App() {
     .then((res)=>{
       console.log(res);
       if (res.data === 1){
-        setButtonText("Usuario verificado, seleccione el método de recuperación");
+        
+        setFormVisible('hidden');
+        changeVis('visible');
       }
       else{
         setButtonText("Usuario no verificado, correo no registrado o sin disponibilidad de esta función");
@@ -72,7 +82,13 @@ function App() {
 
         <div class="login__field">
 					<i class="login__icon fas fa-user"></i>
-					<input type="text" name = "email" class="login__input" onChange={handleChange} value={message} placeholder="Email" />
+					<input type={primerForm} name = "email" class="login__input" onChange={handleChange} value={message} placeholder="Email" />
+          <select id="segundoForm" class="login__selector" name="typepins" onLoad={changeVis('hidden')} >
+            <option value="volvo">Pin jefe</option>
+            <option value="saab">Pin mail</option>
+            <option value="fiat">Pin SMS</option>
+            
+          </select>
 				</div>
           
 		
