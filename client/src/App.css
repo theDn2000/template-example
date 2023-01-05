@@ -7,7 +7,9 @@
   pointer-events: none;
 }
 
-
+#segundoForm {
+  visibility: hidden;
+}
 .App-logo {
   position: static;
   width: 20vw;
