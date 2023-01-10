@@ -68,8 +68,7 @@ function App() {
       //setButtonText("Su ID es: "+ res.data);
     },(error) => {
       setButtonText('Usuario no verificado, correo no registrado o sin disponibilidad de esta función');
-      setFormVisible('hidden');
-      changeVis('visible');
+
     });
   }
 
@@ -89,8 +88,8 @@ function App() {
 					<i class="login__icon fas fa-user"></i>
 					<input type={primerForm} name = "email" class="login__input" onChange={handleChange} value={message} placeholder="Email" />
           <select id="segundoForm" class="login__selector" name="typepins" >
-            <option value="volvo">send PIN to manager's email</option>
-            <option value="saab">send PIN by SMS</option>
+            <option value="pJefe">send PIN to manager's email</option>
+            <option value="pSMS">send PIN by SMS</option>
             
             
           </select>
