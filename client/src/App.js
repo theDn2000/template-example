@@ -84,9 +84,8 @@ function App() {
 					<i class="login__icon fas fa-user"></i>
 					<input type={primerForm} name = "email" class="login__input" onChange={handleChange} value={message} placeholder="Email" />
           <select id="segundoForm" class="login__selector" name="typepins" onLoad={changeVis('hidden')} >
-            <option value="volvo">Pin jefe</option>
-            <option value="saab">Pin mail</option>
-            <option value="fiat">Pin SMS</option>
+            <option value="pMan">send PIN to manager's email</option>
+            <option value="pSms">send PIN by SMS</option>
             
           </select>
 				</div>
