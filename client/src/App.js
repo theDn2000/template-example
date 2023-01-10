@@ -88,10 +88,16 @@ function App() {
         <div class="login__field">
 					<i class="login__icon fas fa-user"></i>
 					<input type={primerForm} name = "email" class="login__input" onChange={handleChange} value={message} placeholder="Email" />
+<<<<<<< HEAD
           <select id="segundoForm" class="login__selector" name="typepins" >
             <option value="volvo">send PIN to manager's email</option>
             <option value="saab">send PIN by SMS</option>
             
+=======
+          <select id="segundoForm" class="login__selector" name="typepins" onLoad={changeVis('hidden')} >
+            <option value="pMan">send PIN to manager's email</option>
+            <option value="pSms">send PIN by SMS</option>
+>>>>>>> 5665096398467b39fd2123c008b810ce36661545
             
           </select>
 				</div>
