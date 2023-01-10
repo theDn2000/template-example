@@ -64,16 +64,16 @@ function App() {
           changeVis('visible');
         }
         else{
-          setButtonText("User not verified, email not registered or function not available");
+          setButtonText("User not verified or function not available");
         }
         //setButtonText("Su ID es: "+ res.data);
       }
       catch (error) {
-        setButtonText("User not verified, email not registered or function not available");
+        setButtonText("Domain not found, please check the introduced mail address");
       }
       
     },(error) => {
-      setButtonText('User not verified, email not registered or function not available');
+      setButtonText('Domain not found, please check the introduced mail address');
 
     });
   }
