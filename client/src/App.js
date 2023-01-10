@@ -56,8 +56,7 @@ function App() {
     axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/comprobarusuario',data,config)
     .then((res)=>{
       console.log(res);
-      
-      if (res.data.u_unlock_user_allowed === "true" && res.data.u_reset_password_allowed === "true"){
+      if (res.data[0].u_unlock_user_allowed === "true" && res.data[0].u_reset_password_allowed === "true"){
         setButtonText("User verified, please select the reset method");
 
         setFormVisible('hidden');
