@@ -56,16 +56,22 @@ function App() {
     axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/comprobarusuario',data,config)
     .then((res)=>{
       console.log(res);
-      if (res.data[0].u_unlock_user_allowed === "true" && res.data[0].u_reset_password_allowed === "true"){
-        setButtonText("User verified, please select the reset method");
-
-        setFormVisible('hidden');
-        changeVis('visible');
+      try {
+        if (res.data[0].u_unlock_user_allowed === "true" && res.data[0].u_reset_password_allowed === "true"){
+          setButtonText("User verified, please select the reset method");
+  
+          setFormVisible('hidden');
+          changeVis('visible');
+        }
+        else{
+          setButtonText("User not verified, email not registered or function not available");
+        }
+        //setButtonText("Su ID es: "+ res.data);
       }
-      else{
+      catch (error) {
         setButtonText("User not verified, email not registered or function not available");
       }
-      //setButtonText("Su ID es: "+ res.data);
+      
     },(error) => {
       setButtonText('User not verified, email not registered or function not available');
 
