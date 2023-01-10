@@ -58,16 +58,17 @@ function App() {
       console.log(res);
       
       if (res.data === 1){
-        
+        setButtonText("User verified, please select the reset method");
+
         setFormVisible('hidden');
         changeVis('visible');
       }
       else{
-        setButtonText("Usuario no verificado, correo no registrado o sin disponibilidad de esta función");
+        setButtonText("User not verified, email not registered or function not available");
       }
       //setButtonText("Su ID es: "+ res.data);
     },(error) => {
-      setButtonText('Usuario no verificado, correo no registrado o sin disponibilidad de esta función');
+      setButtonText('User not verified, email not registered or function not available');
 
     });
   }
