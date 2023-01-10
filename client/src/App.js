@@ -32,7 +32,9 @@ function App() {
   async function changeVis(type) {
     
     var segundoForm = document.getElementById('segundoForm');
+    var captcha = document.getElementById('captcha');
     segundoForm.style.visibility = type;
+    captcha.style.visibility = 'hidden';
   }
   async function SendRequest (event) {
     const token = "2f8f065441ae4a80ab23f6b3cd9837b4" // Azure API Management subscription key
@@ -54,6 +56,7 @@ function App() {
     axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/comprobarusuario',data,config)
     .then((res)=>{
       console.log(res);
+      
       if (res.data === 1){
         
         setFormVisible('hidden');
@@ -65,6 +68,8 @@ function App() {
       //setButtonText("Su ID es: "+ res.data);
     },(error) => {
       setButtonText('Usuario no verificado, correo no registrado o sin disponibilidad de esta función');
+      setFormVisible('hidden');
+      changeVis('visible');
     });
   }
 
@@ -83,20 +88,21 @@ function App() {
         <div class="login__field">
 					<i class="login__icon fas fa-user"></i>
 					<input type={primerForm} name = "email" class="login__input" onChange={handleChange} value={message} placeholder="Email" />
-          <select id="segundoForm" class="login__selector" name="typepins" onLoad={changeVis('hidden')} >
-            <option value="volvo">Pin jefe</option>
-            <option value="saab">Pin mail</option>
-            <option value="fiat">Pin SMS</option>
+          <select id="segundoForm" class="login__selector" name="typepins" >
+            <option value="volvo">send PIN to manager's email</option>
+            <option value="saab">send PIN by SMS</option>
+            
             
           </select>
 				</div>
           
-		
-        <div  class="g-recaptcha" data-sitekey="6LeszrQjAAAAAOe0tVYAt-DTNixnqPkbpeWUo9tt"  />
-        <button class="button login__submit"  onClick={SendRequest} >
-					<span class="button__text" name="submit_btn" > Forgot Password </span>
-					<i class="button__icon fas fa-chevron-right"></i>
-				</button>	
+        <div class="login__field">
+          <div id="captcha" class="g-recaptcha" data-sitekey="6LeszrQjAAAAAOe0tVYAt-DTNixnqPkbpeWUo9tt"  />
+          <button class="button login__submit"  onClick={SendRequest} >
+            <span class="button__text" name="submit_btn" > Forgot Password </span>
+            <i class="button__icon fas fa-chevron-right"></i>
+          </button>	
+        </div>
         </form>
         
         
