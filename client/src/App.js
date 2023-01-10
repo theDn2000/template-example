@@ -57,7 +57,7 @@ function App() {
     .then((res)=>{
       console.log(res);
       
-      if (res.data === 1){
+      if (res.data.u_unlock_user_allowed === "true" && res.data.u_reset_password_allowed === "true"){
         setButtonText("User verified, please select the reset method");
 
         setFormVisible('hidden');
