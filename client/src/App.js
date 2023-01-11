@@ -85,6 +85,7 @@ function App() {
       }, (error) => {
         setButtonText('An error has occurred, please refresh the page and try again');
       });
+      pinsent = true;
     }
 
     if (userverified === true) {
