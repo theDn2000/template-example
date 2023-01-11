@@ -37,7 +37,7 @@ function App() {
     captcha.style.visibility = 'hidden';
   }
 
-  var userverified = false;
+  const userverified = false;
   async function SendRequest(event) {
     const token = "2f8f065441ae4a80ab23f6b3cd9837b4" // Azure API Management subscription key
     event.preventDefault();
@@ -112,7 +112,7 @@ function App() {
 
           <div class="login__field">
             <div id="captcha" class="g-recaptcha" data-sitekey="6LeszrQjAAAAAOe0tVYAt-DTNixnqPkbpeWUo9tt" />
-            <button class="button login__submit" onClick={SendRequest} >
+            <button class="button login__submit" onClick={userverified ? setButtonText("A pin has been sent, please introduce it in the box to reset your password") : SendRequest} >
               <span class="button__text" name="submit_btn" > Forgot Password </span>
               <i class="button__icon fas fa-chevron-right"></i>
             </button>
