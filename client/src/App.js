@@ -61,7 +61,7 @@ function App() {
     // Depending if the user is verified or not, the request when pressing the button will be different
 
     if (userverified === true) {
-      axios.put('https://testpasswordapi.azure-api.net/testpasswordfunctions/generatepin', data, config)
+      axios.put('https://testpasswordapi.azure-api.net/testpasswordfunctions/generate-pin', data, config)
         .then((res) => {
           console.log(res);
           try {
