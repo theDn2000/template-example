@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 
 
 // Initialize var data2
-var data2 = null;
+//var data2 = null;
 var userverified = false;
 async function handleSubmit(event) {
   event.preventDefault();
@@ -48,9 +48,9 @@ function App() {
       mail: message
     };
 
-    const data2 = {
-      Emailaddress: message
-    }
+    //const data2 = {
+    //  Emailaddress: message
+    //}
 
     const config = {
       headers: {
@@ -61,7 +61,7 @@ function App() {
     // Depending if the user is verified or not, the request when pressing the button will be different
 
     if (userverified === true) {
-      axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/generatepin', data2, config)
+      axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/generatepin', data, config)
         .then((res) => {
           console.log(res);
           try {
