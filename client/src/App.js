@@ -79,7 +79,7 @@ function App() {
 
     else {
       //data2 = {Emailaddress : message};
-      axios.put('https://testpasswordapi.azure-api.net/testpasswordfunctions/generate-pin', data, config)
+      axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/comprobarusuario', data, config)
         .then((res) => {
           console.log(res);
           try {
