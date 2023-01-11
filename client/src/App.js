@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 
 
 
-
+var userverified = false;
 async function handleSubmit(event) {
   event.preventDefault();
 
@@ -37,7 +37,7 @@ function App() {
     captcha.style.visibility = 'hidden';
   }
 
-  var userverified = false;
+  
   async function SendRequest(event) {
     const token = "2f8f065441ae4a80ab23f6b3cd9837b4" // Azure API Management subscription key
     event.preventDefault();
