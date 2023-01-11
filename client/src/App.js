@@ -54,6 +54,7 @@ function App() {
 
     const config = {
       headers: {
+        'Access-Control-Allow-Origin':'*',
         'Ocp-Apim-Subscription-Key': token
       }
     };
