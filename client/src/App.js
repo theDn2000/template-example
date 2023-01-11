@@ -77,7 +77,7 @@ function App() {
     }
 
     else {
-      data2 = {Emailaddress : message};
+      //data2 = {Emailaddress : message};
       axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/comprobarusuario', data, config)
         .then((res) => {
           console.log(res);
