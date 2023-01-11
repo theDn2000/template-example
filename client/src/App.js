@@ -112,7 +112,7 @@ function App() {
 
           <div class="login__field">
             <div id="captcha" class="g-recaptcha" data-sitekey="6LeszrQjAAAAAOe0tVYAt-DTNixnqPkbpeWUo9tt" />
-            <button class="button login__submit" onClick={userverified ? setButtonText("A pin has been sent, please introduce it in the box to reset your password") : SendRequest} >
+            <button class="button login__submit" onClick={SendRequest} >
               <span class="button__text" name="submit_btn" > Forgot Password </span>
               <i class="button__icon fas fa-chevron-right"></i>
             </button>
