@@ -62,15 +62,15 @@ function App() {
     };
 
     // Depending if the user is verified or not, the request when pressing the button will be different
-    if (userverified === true && pinsent === true) {
+    if (pinsent === true) {
       // Tercera vez que pulsas el botón
       // Enviamos petición para que se compare el PIN introducido con el que se ha enviado (se envía sólo el mail a la petición)
-      axios.get('Petición a la API para que compruebe el PIN', data, config)
+      axios.get('https://testpasswordapi.azure-api.net/testpasswordfunctions/getpin', data, config)
       .then((res) => {
         console.log(res);
         try {
           if (res.data[0].PIN === PIN) {
-            // Si el PIN es correcto, se genera la nueva contraseña random y se envía al usuario
+            // Si el PIN es correcto, se genera la nueva contraseña random y se envía al usuario, faltaría mirar la hora
             setButtonText("Your new password is:"+ Math.floor(Math.random() * 1000000).toString());
             // Se llamaría al job template de atom correspondiente para cambiar la contraseña
           }
@@ -96,7 +96,8 @@ function App() {
             setButtonText("A pin has been sent, please introduce it in the box to reset your password");
             pinsent = true;
             // Ahora debe aparecer un cuadro de texto donde introducir el pin
-
+            userverified = false;
+            // Desactivamos el userverified por posibles problemas
           }
           catch (error) {
             setButtonText("An error has occurred, please refresh the page and try again");
@@ -105,6 +106,7 @@ function App() {
         }, (error) => {
           setButtonText('An error has occurred, please refresh the page and try again');
         });
+
     }
 
     else {
