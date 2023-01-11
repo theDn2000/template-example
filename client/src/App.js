@@ -4,8 +4,8 @@ import axios from 'axios';
 import React, { useState } from 'react';
 
 
-
-
+// Initialize var data2
+var data2 = null;
 var userverified = false;
 async function handleSubmit(event) {
   event.preventDefault();
@@ -46,8 +46,11 @@ function App() {
 
     const data = {
       mail: message
-
     };
+
+    const data2 = {
+      Emailaddress: message
+    }
 
     const config = {
       headers: {
@@ -58,9 +61,23 @@ function App() {
     // Depending if the user is verified or not, the request when pressing the button will be different
 
     if (userverified === true) {
-      setButtonText("A pin has been sent, please introduce it in the box to reset your password");
+      axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/generatepin', data2, config)
+        .then((res) => {
+          console.log(res);
+          try {
+            setButtonText("A pin has been sent, please introduce it in the box to reset your password");
+          }
+          catch (error) {
+            setButtonText("An error has occurred, please refresh the page and try again");
+          }
+
+        }, (error) => {
+          setButtonText('An error has occurred, please refresh the page and try again');
+        });
     }
+
     else {
+      data2 = {Emailaddress : message};
       axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/comprobarusuario', data, config)
         .then((res) => {
           console.log(res);
