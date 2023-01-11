@@ -7,6 +7,8 @@ import React, { useState } from 'react';
 // Initialize var data2
 //var data2 = null;
 var userverified = false;
+var pinsent = false;
+var PIN = null;
 async function handleSubmit(event) {
   event.preventDefault();
 
@@ -60,13 +62,41 @@ function App() {
     };
 
     // Depending if the user is verified or not, the request when pressing the button will be different
+    if (userverified === true && pinsent === true) {
+      // Tercera vez que pulsas el botón
+      // Enviamos petición para que se compare el PIN introducido con el que se ha enviado (se envía sólo el mail a la petición)
+      axios.get('Petición a la API para que compruebe el PIN', data, config)
+      .then((res) => {
+        console.log(res);
+        try {
+          if (res.data[0].PIN === PIN) {
+            // Si el PIN es correcto, se genera la nueva contraseña random y se envía al usuario
+            setButtonText("Your new password is:"+ Math.floor(Math.random() * 1000000).toString());
+            // Se llamaría al job template de atom correspondiente para cambiar la contraseña
+          }
+          else {
+            setButtonText("The PIN is not correct, please try again");
+          }
+        }
+        catch (error) {
+          setButtonText("An error has occurred, please refresh the page and try again");
+        }
+
+      }, (error) => {
+        setButtonText('An error has occurred, please refresh the page and try again');
+      });
+    }
 
     if (userverified === true) {
+      // Segunda vez que pulsas el botón
       axios.put('https://testpasswordapi.azure-api.net/testpasswordfunctions/generate-pin', data, config)
         .then((res) => {
           console.log(res);
           try {
             setButtonText("A pin has been sent, please introduce it in the box to reset your password");
+            pinsent = true;
+            // Ahora debe aparecer un cuadro de texto donde introducir el pin
+
           }
           catch (error) {
             setButtonText("An error has occurred, please refresh the page and try again");
@@ -78,7 +108,7 @@ function App() {
     }
 
     else {
-      //data2 = {Emailaddress : message};
+      // Primera vez que pulsas el botón
       axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/comprobarusuario', data, config)
         .then((res) => {
           console.log(res);
