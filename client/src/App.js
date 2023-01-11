@@ -65,7 +65,7 @@ function App() {
     if (pinsent === true) {
       // Tercera vez que pulsas el botón
       // Enviamos petición para que se compare el PIN introducido con el que se ha enviado (se envía sólo el mail a la petición)
-      axios.get('https://testpasswordapi.azure-api.net/testpasswordfunctions/getpin', data, config)
+      axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/getpin', data, config)
       .then((res) => {
         console.log(res);
         try {
