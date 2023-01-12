@@ -116,7 +116,7 @@ function App() {
             changeVis('hidden');
             
             setButtonText("A pin has been sent, please introduce it in the box to reset your password");
-            message = "";
+            setMessage("");
             pinsent = true;
             // Ahora debe aparecer un cuadro de texto donde introducir el pin
             userverified = false;
