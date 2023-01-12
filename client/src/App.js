@@ -46,7 +46,7 @@ function App() {
   var pin = {
     mail: ""
   };
-
+  
   async function SendRequest(event) {
     const token = "2f8f065441ae4a80ab23f6b3cd9837b4" // Azure API Management subscription key
     event.preventDefault();
@@ -109,21 +109,19 @@ function App() {
       axios.put('https://testpasswordapi.azure-api.net/testpasswordfunctions/generate-pin', data, config)
         .then((res) => {
           console.log(res);
-          try {
-            setPinMessage('Pin');
-            setFormVisible('visible');
-            changeVis('hidden');
-            
-            setButtonText("A pin has been sent, please introduce it in the box to reset your password");
-            setMessage("");
-            pinsent = true;
-            // Ahora debe aparecer un cuadro de texto donde introducir el pin
-            userverified = false;
-            // Desactivamos el userverified por posibles problemas
-          }
-          catch (error) {
-            setButtonText("An error has occurred, please refresh the page and try again");
-          }
+         
+          setPinMessage('Pin');
+          setFormVisible('visible');
+          changeVis('hidden');
+          
+          setButtonText("A pin has been sent, please introduce it in the box to reset your password");
+          
+          pinsent = true;
+          // Ahora debe aparecer un cuadro de texto donde introducir el pin
+          userverified = false;
+          // Desactivamos el userverified por posibles problemas
+         
+    
 
         }, (error) => {
           setButtonText('An error has occurred, please refresh the page and try again');
