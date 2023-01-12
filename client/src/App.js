@@ -40,17 +40,34 @@ function App() {
     captcha.style.visibility = 'hidden';
   }
 
-  
+  const data = {
+    mail: ""
+  };
+
+  const pin = {
+    mail: ""
+  };
+
   async function SendRequest(event) {
     const token = "2f8f065441ae4a80ab23f6b3cd9837b4" // Azure API Management subscription key
     event.preventDefault();
     console.log("res");
     //axios.get('https://testpasswordfunctions.azurewebsites.net/api/HttpTrigger2?clientId=apim-testpasswordAPI'),
 
-    const data = {
-      mail: message
-    };
+    if (!pinsent)
+    {
+      data = {
+        mail: message
+      };
+    }
+    else
+    {
+      pin = {
+        pin: message
+      };
+    }
 
+    
     //const data2 = {
     //  Emailaddress: message
     //}
@@ -70,7 +87,7 @@ function App() {
       .then((res) => {
         console.log(res);
         try {
-          if (res.data[0].PIN === PIN) {
+          if (res.data[0].PIN === pin.pin) {
             // Si el PIN es correcto, se genera la nueva contraseña random y se envía al usuario, faltaría mirar la hora
             setButtonText("Your new password is:"+ Math.floor(Math.random() * 1000000).toString());
             // Se llamaría al job template de atom correspondiente para cambiar la contraseña
@@ -100,6 +117,7 @@ function App() {
             changeVis('hidden');
             
             setButtonText("A pin has been sent, please introduce it in the box to reset your password");
+            message = "";
             pinsent = true;
             // Ahora debe aparecer un cuadro de texto donde introducir el pin
             userverified = false;
