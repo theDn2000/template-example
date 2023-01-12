@@ -22,7 +22,7 @@ var pin = {
   mail: ""
 };
 
-var tiempo = 30;
+var tiempo = 29;
 var password = "";
 
 function App() {
@@ -43,7 +43,7 @@ function App() {
   {
    // Your code here
    // Parameters are purely optional.
-    setButtonText("Your new temporal password is: "+ password + " you have " + tiempo + " to use it");
+    setButtonText("Your new temporal password is: "+ password + " you have " + tiempo + "s to use it");
     tiempo--;
   }
   async function changeVis(type) {
@@ -107,7 +107,7 @@ function App() {
              }
 
 
-             setButtonText("Your new temporal password is: "+ password + " you have " + tiempo + " to use it");
+             setButtonText("Your new temporal password is: "+ password + " you have " + 30 + "s to use it");
 
             var refreshIntervalId = setInterval(intervalbutton, 1000);
 
