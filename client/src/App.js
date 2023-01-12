@@ -85,8 +85,8 @@ function App() {
       axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/getpin', data, config)
       .then((res) => {
         console.log(res);
-        try {
-          if (res.data[0].PIN === pin.pin) {
+       
+          if (res.data == pin.pin) {
             // Si el PIN es correcto, se genera la nueva contraseña random y se envía al usuario, faltaría mirar la hora
             setButtonText("Your new password is:"+ Math.floor(Math.random() * 1000000).toString());
             // Se llamaría al job template de atom correspondiente para cambiar la contraseña
@@ -94,10 +94,8 @@ function App() {
           else {
             setButtonText("The PIN is not correct, please try again");
           }
-        }
-        catch (error) {
-          setButtonText("An error has occurred, please refresh the page and try again");
-        }
+       
+        
 
       }, (error) => {
         setButtonText('An error has occurred, please refresh the page and try again');
