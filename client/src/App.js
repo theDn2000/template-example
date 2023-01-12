@@ -24,13 +24,12 @@ function App() {
   // pone invisible el segundo formulario
   const [primerForm, setFormVisible] = useState('text'); // pone visible el segundo formulario
   const [message, setMessage] = useState('');
-
+  const [pinmessage, setPinMessage] = useState('Mail');
   const handleChange = event => {
     setMessage(event.target.value);
 
 
   };
-
 
 
   async function changeVis(type) {
@@ -96,6 +95,10 @@ function App() {
         .then((res) => {
           console.log(res);
           try {
+            setPinMessage('Pin');
+            setFormVisible('visible');
+            changeVis('hidden');
+            
             setButtonText("A pin has been sent, please introduce it in the box to reset your password");
             pinsent = true;
             // Ahora debe aparecer un cuadro de texto donde introducir el pin
@@ -124,6 +127,8 @@ function App() {
               userverified = true;
               setFormVisible('hidden');
               changeVis('visible');
+
+
             }
             else {
               setButtonText("User not verified or function not available");
@@ -154,7 +159,8 @@ function App() {
 
     <div class="login__field">
       <i class="login__icon fas fa-user"></i>
-      <input type={primerForm} name="email" class="login__input" onChange={handleChange} value={message} placeholder="Email" />
+      <input type={primerForm} name="email" class="login__input" onChange={handleChange} value={message} placeholder={mailHolder} />
+      <input type={primerForm} name="pin" class="login__input" onChange={handleChange} value={pinmessage} placeholder="PIN" />
       <select id="segundoForm" class="login__selector" name="typepins" >
         <option value="pJefe">send PIN to manager's email</option>
         <option value="pSMS">send PIN by SMS</option>
