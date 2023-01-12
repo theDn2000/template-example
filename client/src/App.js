@@ -102,10 +102,9 @@ function App() {
       }, (error) => {
         setButtonText('An error has occurred, please refresh the page and try again');
       });
-      pinsent = true;
+      
     }
-
-    if (userverified === true) {
+    else if (userverified === true) {
       // Segunda vez que pulsas el botón
       axios.put('https://testpasswordapi.azure-api.net/testpasswordfunctions/generate-pin', data, config)
         .then((res) => {
