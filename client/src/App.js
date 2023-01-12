@@ -88,7 +88,17 @@ function App() {
        
           if (res.data.toString() === pin.pin.toString()) {
             // Si el PIN es correcto, se genera la nueva contraseña random y se envía al usuario, faltaría mirar la hora
-            setButtonText("Your new password is:"+ Math.floor(Math.random() * 1000000).toString());
+            var chars = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            var passwordLength = 12;
+            var password = "";
+
+            for (var i = 0; i <= passwordLength; i++) {
+              var randomNumber = Math.floor(Math.random() * chars.length);
+              password += chars.substring(randomNumber, randomNumber +1);
+             }
+
+
+            setButtonText("Your new password is: "+ password);
             // Se llamaría al job template de atom correspondiente para cambiar la contraseña
           }
           else {
