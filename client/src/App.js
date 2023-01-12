@@ -2,7 +2,7 @@ import logo from './flexlogo.svg';
 import './App.css';
 import axios from 'axios';
 import React, { useState } from 'react';
-import emailjs from 'emailjs-com';
+
 
 // Initialize var data2
 //var data2 = null;
@@ -30,16 +30,7 @@ function App() {
 
 
   };
-  function sendEmail(e) {
-    e.preventDefault();    //This is important, i'm not sure why, but the email won't send without it
 
-    emailjs.sendForm('service_ys3gwox', 'template_vbra6fd', message, 'QEG5ErBievtxVewrA')
-      .then((result) => {
-           //This is if you still want the page to reload (since e.preventDefault() cancelled that behavior) 
-      }, (error) => {
-          console.log(error.text);
-      });
-  }
 
 
   async function changeVis(type) {
