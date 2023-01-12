@@ -86,7 +86,7 @@ function App() {
       .then((res) => {
         console.log(res);
        
-          if (res.data === pin.pin) {
+          if (res.data.toString() === pin.pin.toString()) {
             // Si el PIN es correcto, se genera la nueva contraseña random y se envía al usuario, faltaría mirar la hora
             setButtonText("Your new password is:"+ Math.floor(Math.random() * 1000000).toString());
             // Se llamaría al job template de atom correspondiente para cambiar la contraseña
@@ -107,10 +107,11 @@ function App() {
       axios.put('https://testpasswordapi.azure-api.net/testpasswordfunctions/generate-pin', data, config)
         .then((res) => {
           console.log(res);
-         
           setPinMessage('Pin');
-          setFormVisible('visible');
           changeVis('hidden');
+          
+          setFormVisible('visible');
+         
           
           setButtonText("A pin has been sent, please introduce it in the box to reset your password");
           setMessage("");
