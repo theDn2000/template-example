@@ -22,6 +22,9 @@ var pin = {
   mail: ""
 };
 
+var tiempo = 30;
+var password = "";
+
 function App() {
 
   const [pokeid, setButtonText] = useState('');
@@ -36,7 +39,13 @@ function App() {
 
   };
 
-
+  function intervalbutton()
+  {
+   // Your code here
+   // Parameters are purely optional.
+    setButtonText("Your new temporal password is: "+ password + " you have " + tiempo + " to use it");
+    tiempo--;
+  }
   async function changeVis(type) {
 
     var segundoForm = document.getElementById('segundoForm');
@@ -90,7 +99,7 @@ function App() {
             // Si el PIN es correcto, se genera la nueva contraseña random y se envía al usuario, faltaría mirar la hora
             var chars = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             var passwordLength = 12;
-            var password = "";
+            
 
             for (var i = 0; i <= passwordLength; i++) {
               var randomNumber = Math.floor(Math.random() * chars.length);
@@ -98,7 +107,16 @@ function App() {
              }
 
 
-            setButtonText("Your new password is: "+ password);
+             setButtonText("Your new temporal password is: "+ password + " you have " + tiempo + " to use it");
+
+            var refreshIntervalId = setInterval(intervalbutton, 1000);
+
+            setTimeout(() => {
+              setButtonText("");
+              clearInterval(refreshIntervalId);
+            }, 30000);
+
+
             // Se llamaría al job template de atom correspondiente para cambiar la contraseña
           }
           else {
