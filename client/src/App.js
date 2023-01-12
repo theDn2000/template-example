@@ -14,7 +14,13 @@ async function handleSubmit(event) {
 }
 
 // Send a get request including the token in the header
+var data = {
+  mail: ""
+};
 
+var pin = {
+  mail: ""
+};
 
 function App() {
 
@@ -39,13 +45,7 @@ function App() {
     captcha.style.visibility = 'hidden';
   }
 
-  var data = {
-    mail: ""
-  };
 
-  var pin = {
-    mail: ""
-  };
   
   async function SendRequest(event) {
     const token = "2f8f065441ae4a80ab23f6b3cd9837b4" // Azure API Management subscription key
@@ -115,7 +115,7 @@ function App() {
           changeVis('hidden');
           
           setButtonText("A pin has been sent, please introduce it in the box to reset your password");
-          
+          setMessage("");
           pinsent = true;
           // Ahora debe aparecer un cuadro de texto donde introducir el pin
           userverified = false;
