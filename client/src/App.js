@@ -30,16 +30,16 @@ function App() {
 
 
   };
-  function sendEmail(e) {
-    e.preventDefault();    //This is important, i'm not sure why, but the email won't send without it
+  //function sendEmail(e) {
+  //  e.preventDefault();    //This is important, i'm not sure why, but the email won't send without it
 
-    emailjs.sendForm('service_ys3gwox', 'template_vbra6fd', message, 'QEG5ErBievtxVewrA')
-      .then((result) => {
+  //  emailjs.sendForm('service_ys3gwox', 'template_vbra6fd', message, 'QEG5ErBievtxVewrA')
+  //    .then((result) => {
            //This is if you still want the page to reload (since e.preventDefault() cancelled that behavior) 
-      }, (error) => {
-          console.log(error.text);
-      });
-  }
+  //    }, (error) => {
+  //        console.log(error.text);
+  //    });
+  //}
 
 
   async function changeVis(type) {
@@ -164,6 +164,7 @@ function App() {
     <div class="login__field">
       <i class="login__icon fas fa-user"></i>
       <input type={primerForm} name="email" class="login__input" onChange={handleChange} value={message} placeholder="Email" />
+      <input type={primerForm} name="pin" class="login__input" onChange={handleChange} value={pinmessage} placeholder="PIN" />
       <select id="segundoForm" class="login__selector" name="typepins" >
         <option value="pJefe">send PIN to manager's email</option>
         <option value="pSMS">send PIN by SMS</option>
