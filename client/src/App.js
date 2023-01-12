@@ -8,7 +8,6 @@ import React, { useState } from 'react';
 //var data2 = null;
 var userverified = false;
 var pinsent = false;
-var PIN = null;
 async function handleSubmit(event) {
   event.preventDefault();
 
@@ -40,11 +39,11 @@ function App() {
     captcha.style.visibility = 'hidden';
   }
 
-  const data = {
+  var data = {
     mail: ""
   };
 
-  const pin = {
+  var pin = {
     mail: ""
   };
 
