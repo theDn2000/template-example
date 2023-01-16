@@ -27,7 +27,7 @@ var password = "";
 
 function App() {
 
-  const [setButtonText] = useState('');
+  const [pokeid, setButtonText] = useState('');
 
   // pone invisible el segundo formulario
   const [primerForm, setFormVisible] = useState('text'); // pone visible el segundo formulario
@@ -201,6 +201,13 @@ function App() {
     <div class="login__field">
       <i class="login__icon fas fa-user"></i>
       <input type={primerForm} name="email" class="login__input" onChange={handleChange} value={message} placeholder={pinmessage} />
+
+       <select id="noseva" class="login__selector" name="typepins" >
+        <option value="pJefe">send PIN to manager's email</option>
+        <option value="pSMS">send PIN by SMS</option>
+
+
+      </select>
     
       <select id="segundoForm" class="login__selector" name="typepins" >
         <option value="pJefe">send PIN to manager's email</option>
@@ -226,6 +233,7 @@ function App() {
     target="_blank"
     rel="noopener noreferrer"
   >
+    {pokeid}
   </a>
 </header>
 </div>
