@@ -201,19 +201,10 @@ function App() {
     <div class="login__field">
       <i class="login__icon fas fa-user"></i>
       <input type={primerForm} name="email" class="login__input" onChange={handleChange} value={message} placeholder={pinmessage} />
-
-       <select id="noseva" class="login__selector_temp" name="typepins" >
-        <option value="pJefe">send PIN to manager's email</option>
-        <option value="pSMS">send PIN by SMS</option>
-
-
-      </select>
     
       <select id="segundoForm" class="login__selector" name="typepins" >
         <option value="pJefe">send PIN to manager's email</option>
         <option value="pSMS">send PIN by SMS</option>
-
-
       </select>
     </div>
 
