@@ -27,8 +27,6 @@ var password = "";
 
 function App() {
 
-  const [pokeid, setButtonText] = useState('');
-
   // pone invisible el segundo formulario
   const [primerForm, setFormVisible] = useState('text'); // pone visible el segundo formulario
   const [message, setMessage] = useState('');
