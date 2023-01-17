@@ -153,6 +153,7 @@ input[type="text"] {
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   cursor: pointer;
+  font-weight: bolder;
   
   /*background: #fff;
 	font-size: 14px;
@@ -174,7 +175,7 @@ input[type="text"] {
 }
 
 button {
-  padding: 10px 38px;
+  padding: 15px 52px;
   border-style: solid;
   border-width: 1px;
   border-color: #f35623;
@@ -190,7 +191,7 @@ button {
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   cursor: pointer;
-  font-weight: bolder;
+  
     
   /*border-radius: 5px;
     padding: 10px;
