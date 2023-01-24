@@ -141,6 +141,13 @@ input[type="text"] {
     color: white;
     background: none;
 }
+
+input:-internal-autofill-selected {
+    background-color: none !important;
+    background-image: none !important;
+    color: white !important;
+}
+
 .login__submit {
   padding: 25px 52px;
   border-style: solid;
