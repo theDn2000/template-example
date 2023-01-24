@@ -17,7 +17,7 @@
 }
 .g-recaptcha {
   margin: auto;
-  width: 50%;
+  width: 12%;
   position: relative;	
   padding-bottom: 50px;
   
@@ -74,6 +74,7 @@
 	padding: 20px 0px;
 
 	position: relative;	
+
 }
 
 .login__icon {
@@ -91,7 +92,7 @@
 	padding: 10px;
 	padding-left: 24px;
 	/*font-weight: 700;*/
-	width: 75%;
+	width: 61%;
 	transition: .2s;
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -157,7 +158,7 @@ input[type="text"] {
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   cursor: pointer;
-  font-weight: bolder;
+  /*font-weight: bolder;*/
   width: 63%;
   
   /*background: #fff;

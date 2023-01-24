@@ -193,9 +193,6 @@ function App() {
 
 <header className="App-header">
   <img src={logo} className="App-logo" alt="logo" />
-  <script src=
-    "https://www.google.com/recaptcha/api.js" async defer />
-
 
   <form class="login" onSubmit={handleSubmit} method="post">
 
@@ -227,6 +224,7 @@ function App() {
   >
     {pokeid}
   </a>
+  <script src= "https://www.google.com/recaptcha/api.js" async defer />
 </header>
 </div>
 );
