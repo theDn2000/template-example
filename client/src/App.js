@@ -57,7 +57,7 @@ function App() {
 
   
   async function SendRequest(event) {
-    const token = "2f8f065441ae4a80ab23f6b3cd9837b4" // Azure API Management subscription key
+    const token = SUBSCRIPTION_KEY // Azure API Management subscription key
     event.preventDefault();
     console.log("res");
     //axios.get('https://testpasswordfunctions.azurewebsites.net/api/HttpTrigger2?clientId=apim-testpasswordAPI'),
