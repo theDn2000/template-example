@@ -83,7 +83,7 @@
 }
 
 .login__input {
-  min-height: 68px;
+  min-height: 40px;
   margin-bottom: 0px;
 	border: none;
 	border-bottom: 2px solid #D1D1D4;
@@ -133,11 +133,12 @@
 
 input[type="text"] {
     padding: 10px;
-    border-radius: 5px;
+    /*border-radius: 5px;*/
     margin: 10px;
-    font-family: "Times New Roman", Times, serif;
-    font-size: larger;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: x-large;
     color: white;
+    background: none;
 }
 .login__submit {
   padding: 15px 52px;
