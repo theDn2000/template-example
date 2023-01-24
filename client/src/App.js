@@ -83,8 +83,8 @@ function App() {
     const config = {
       headers: {
         'Access-Control-Allow-Origin':'*',
-        //'Ocp-Apim-Subscription-Key': process.env.SUBSCRIPTION_KEY.toString(),
-        'Ocp-Apim-Subscription-Key': "2f8f065441ae4a80ab23f6b3cd9837b4"
+        'Ocp-Apim-Subscription-Key': process.env.SUBSCRIPTION_KEY.toString()
+        //'Ocp-Apim-Subscription-Key': "2f8f065441ae4a80ab23f6b3cd9837b4"
       }
     };
 
