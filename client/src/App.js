@@ -57,7 +57,7 @@ function App() {
 
   
   async function SendRequest(event) {
-    const token = process.env['SUBSCRIPTION_KEY']; // Azure API Management subscription key
+    //const token = process.env['SNOW_INSTANCE_URL']; // Azure API Management subscription key
     event.preventDefault();
     console.log("res");
     //axios.get('https://testpasswordfunctions.azurewebsites.net/api/HttpTrigger2?clientId=apim-testpasswordAPI'),
@@ -83,7 +83,7 @@ function App() {
     const config = {
       headers: {
         'Access-Control-Allow-Origin':'*',
-        'Ocp-Apim-Subscription-Key': token
+        'Ocp-Apim-Subscription-Key': process.env.SUBSCRIPTION_KEY
       }
     };
 
