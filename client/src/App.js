@@ -23,6 +23,11 @@ var data2 = {
   method: ""
 };
 
+var data3 = {
+  mail: "",
+  pin: ""
+};
+
 var pin = {
   mail: ""
 };
