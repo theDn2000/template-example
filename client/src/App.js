@@ -87,9 +87,9 @@ function App() {
     }
     else
     {
-      pin = {
-        pin: message
-      };
+      //pin = {
+      //  pin: message
+      //};
       data3 = {
         mail: data.mail,
         pin: message
