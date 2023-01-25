@@ -159,9 +159,6 @@ function App() {
           userverified = false;
           settextorangebutton("Reset Password");
           // Desactivamos el userverified por posibles problemas
-          
-         
-    
 
         }, (error) => {
           //setButtonText('An error has occurred, please refresh the page and try again');
@@ -190,32 +187,32 @@ function App() {
               setButtonText("Please, select the reset method");
               // Verify user changing the boolean
               userverified = true;
-              setFormVisible('hidden');
-              changeVis('visible');
-
-
-            }
-            // The user is not verified but for security reasons, we don't want to tell the user that
-            else {
-              setButtonText("Please, select the reset method");
-              userverified = true;
-              //setFormVisible('hidden');
               setinputdisabled(true);
               settextorangebutton("Send");
               changeVis('visible');
-              // Create a new boolean to check if the verification is fake or not
+            }
+            // The user exists but it's not allowed to reset the password
+            else {
+              setButtonText("Please, select the reset method");
+              userverified = true;
+              setinputdisabled(true);
+              settextorangebutton("Send");
+              changeVis('visible');
+              // Create a new boolean to check if the verification is fake or not (?)
             }
           }
+          // The user does not exist but for security reasons we don't want to show it
           catch (error) {
-            setButtonText("Please, introduce a valid email address");
+            setButtonText("Please, select the reset method");
+            userverified = true;
+            setinputdisabled(true);
+            settextorangebutton("Send");
+            changeVis('visible');
+            // Create a new boolean to check if the verification is fake or not (?)
           }
 
         }, (error) => {
           setButtonText('An error has occurred, please try again in a few minutes');
-          userverified = true;
-          setinputdisabled(true);
-          settextorangebutton("Send");
-          changeVis('visible');
         });
     }
   }
