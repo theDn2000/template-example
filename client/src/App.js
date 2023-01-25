@@ -28,9 +28,9 @@ var data3 = {
   pin: ""
 };
 
-var pin = {
-  mail: ""
-};
+//var pin = {
+//  mail: ""
+//};
 
 var tiempo = 29;
 var password = "";
