@@ -18,6 +18,11 @@ var data = {
   mail: ""
 };
 
+var data2 = {
+  mail: "",
+  method: ""
+};
+
 var pin = {
   mail: ""
 };
@@ -28,6 +33,9 @@ var password = "";
 function App() {
 
   const [pokeid, setButtonText] = useState('');
+  const [textorangebutton, settextorangebutton] = useState("Forgot Password");
+  const [inputdisabled, setinputdisabled] = useState(false);
+  const [selects, setSelects] = useState(); // Estado para el select
 
   // pone invisible el segundo formulario
   const [primerForm, setFormVisible] = useState('text'); // pone visible el segundo formulario
@@ -62,6 +70,11 @@ function App() {
     console.log("res");
     //axios.get('https://testpasswordfunctions.azurewebsites.net/api/HttpTrigger2?clientId=apim-testpasswordAPI'),
 
+    data2 = {
+      mail: message,
+      method: selects
+    }
+
     if (!pinsent)
     {
       data = {
@@ -75,10 +88,6 @@ function App() {
       };
     }
 
-    
-    //const data2 = {
-    //  Emailaddress: message
-    //}
 
     const config = {
       headers: {
@@ -92,7 +101,7 @@ function App() {
     if (pinsent === true) {
       // Tercera vez que pulsas el botón
       // Enviamos petición para que se compare el PIN introducido con el que se ha enviado (se envía sólo el mail a la petición)
-      axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/getpin', data, config)
+      axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/getpin', data, config) // Esta función nos debe decir si el pin es correcto o no
       .then((res) => {
         console.log(res);
        
@@ -107,6 +116,7 @@ function App() {
               password += chars.substring(randomNumber, randomNumber +1);
              }
 
+             // Aquí se debe llamar a la función de Ansible que cambia la contraseña en el AD
 
              setButtonText("Your new temporal password is: "+ password + " you have " + 30 + "s to use it");
 
@@ -133,26 +143,39 @@ function App() {
     }
     else if (userverified === true) {
       // Segunda vez que pulsas el botón
-      axios.put('https://testpasswordapi.azure-api.net/testpasswordfunctions/generate-pin', data, config)
+      axios.put('https://testpasswordapi.azure-api.net/testpasswordfunctions/generate-pin', data2, config) //En esta función se genera el pin y se envía al usuario por el método seleccionado
         .then((res) => {
           console.log(res);
           setPinMessage('Pin');
           changeVis('hidden');
           
           setFormVisible('visible');
-         
+          setinputdisabled(false);
           
           setButtonText("A pin has been sent, please introduce it in the box to reset your password");
           setMessage("");
           pinsent = true;
           // Ahora debe aparecer un cuadro de texto donde introducir el pin
           userverified = false;
+          settextorangebutton("Reset Password");
           // Desactivamos el userverified por posibles problemas
+          
          
     
 
         }, (error) => {
-          setButtonText('An error has occurred, please refresh the page and try again');
+          //setButtonText('An error has occurred, please refresh the page and try again');
+          setPinMessage('Pin');
+          changeVis('hidden');
+          
+          setFormVisible('visible');
+          setButtonText("A pin has been sent, please introduce it in the box to reset your password");
+          setMessage("");
+          setinputdisabled(false);
+          pinsent = true;
+          // Ahora debe aparecer un cuadro de texto donde introducir el pin
+          userverified = false;
+          settextorangebutton("Reset Password");
         });
 
     }
@@ -164,7 +187,7 @@ function App() {
           console.log(res);
           try {
             if (res.data[0].u_unlock_user_allowed === "true" && res.data[0].u_reset_password_allowed === "true") {
-              setButtonText("User verified, please select the reset method");
+              setButtonText("Please, select the reset method");
               // Verify user changing the boolean
               userverified = true;
               setFormVisible('hidden');
@@ -172,17 +195,27 @@ function App() {
 
 
             }
+            // The user is not verified but for security reasons, we don't want to tell the user that
             else {
-              setButtonText("User not verified or function not available");
+              setButtonText("Please, select the reset method");
+              userverified = true;
+              //setFormVisible('hidden');
+              setinputdisabled(true);
+              settextorangebutton("Send");
+              changeVis('visible');
+              // Create a new boolean to check if the verification is fake or not
             }
-            //setButtonText("Su ID es: "+ res.data);
           }
           catch (error) {
-            setButtonText("Domain not found, please check the introduced mail address");
+            setButtonText("Please, introduce a valid email address");
           }
 
         }, (error) => {
-          setButtonText('Domain not found, please check the introduced mail address');
+          setButtonText('An error has occurred, please try again in a few minutes');
+          userverified = true;
+          setinputdisabled(true);
+          settextorangebutton("Send");
+          changeVis('visible');
         });
     }
   }
@@ -198,16 +231,21 @@ function App() {
 
     <div class="login__field">
       <i class="login__icon fas fa-user"></i>
-      <input type={primerForm} name="email" class="login__input" onChange={handleChange} value={message} placeholder={pinmessage} />
-    
-      <select id="segundoForm" class="login__selector" name="typepins" >
-        <option value="pJefe">send PIN to manager's email</option>
-        <option value="pSMS">send PIN by SMS</option>
-      </select>
-      <button class="button login__submit" onClick={SendRequest} >
-        <span class="button__text" name="submit_btn" > Forgot Password </span>
-        <i class="button__icon fas fa-chevron-right"></i>
-      </button>
+      <div>
+        <input type={primerForm} name="email" class="login__input" onChange={handleChange} value={message} placeholder={pinmessage} autoComplete="off" input disabled={inputdisabled} />
+      </div>
+      <div>
+        <select id="segundoForm" class="login__selector" name="typepins" value={selects} onChange={e=>setSelects(e.target.value)}>
+          <option value="pJefe">send PIN to manager's email</option>
+          <option value="pSMS">send PIN by SMS</option>
+        </select>
+      </div>
+      <div>
+        <button class="button login__submit" onClick={SendRequest} >
+          <span class="button__text" name="submit_btn" > {textorangebutton} </span>
+          <i class="button__icon fas fa-chevron-right"></i>
+        </button>
+      </div>
     </div>
 
     <div class="login__field">
