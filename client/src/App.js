@@ -40,7 +40,7 @@ function App() {
   const [pokeid, setButtonText] = useState('');
   const [textorangebutton, settextorangebutton] = useState("Forgot Password");
   const [inputdisabled, setinputdisabled] = useState(false);
-  const [selects, setSelects] = useState(); // Estado para el select
+  const [selects, setSelects] = useState("pJefe"); // Estado para el select (DEFAULT: pJefe)
 
   // pone invisible el segundo formulario
   const [primerForm, setFormVisible] = useState('text'); // pone visible el segundo formulario
