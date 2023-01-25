@@ -74,7 +74,6 @@ function App() {
       mail: message,
       method: selects
     }
-
     if (!pinsent)
     {
       data = {
@@ -100,12 +99,16 @@ function App() {
     // Depending if the user is verified or not, the request when pressing the button will be different
     if (pinsent === true) {
       // Tercera vez que pulsas el botón
+      data3 = {
+        mail: data.mail,
+        pin: message
+      };
       // Enviamos petición para que se compare el PIN introducido con el que se ha enviado (se envía sólo el mail a la petición)
-      axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/getpin', data, config) // Esta función nos debe decir si el pin es correcto o no
+      axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/getpin', data3, config) // Esta función nos debe decir si el pin es correcto o no AQUÍ HAY QUE PASARLE PIN Y NO DATA
       .then((res) => {
         console.log(res);
        
-          if (res.data.toString() === pin.pin.toString()) {
+          if (res.data.toString() === "Correct PIN") {
             // Si el PIN es correcto, se genera la nueva contraseña random y se envía al usuario, faltaría mirar la hora
             var chars = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             var passwordLength = 12;
