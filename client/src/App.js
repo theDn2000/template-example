@@ -194,11 +194,16 @@ function App() {
 
     else {
       // Primera vez que pulsas el botón
-      axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/comprobarusuario', data, config)
+      // If mail does not contain @ or .com, the API returns an error
+      if (data.mail.indexOf("@") === -1 || data.mail.indexOf(".com") === -1) {
+        setButtonText('Please, introduce a valid email');
+      }
+      else {
+        axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/comprobarusuario', data, config)
         .then((res) => {
           console.log(res);
           try {
-            if (res.data[0].u_unlock_user_allowed === "true" && res.data[0].u_reset_password_allowed === "true") {
+            if (res.data[0] === "yes") {
               setButtonText("Please, select the reset method");
               // Verify user changing the boolean
               userverified = true;
@@ -208,27 +213,19 @@ function App() {
             }
             // The user exists but it's not allowed to reset the password
             else {
-              setButtonText("Please, select the reset method");
-              userverified = true;
-              setinputdisabled(true);
-              settextorangebutton("Send");
-              changeVis('visible');
+              setButtonText("The response from the server is unexpected, please try again in a few minutes");
               // Create a new boolean to check if the verification is fake or not (?)
             }
           }
           // The user does not exist but for security reasons we don't want to show it
           catch (error) {
-            setButtonText("Please, select the reset method");
-            userverified = true;
-            setinputdisabled(true);
-            settextorangebutton("Send");
-            changeVis('visible');
-            // Create a new boolean to check if the verification is fake or not (?)
+            setButtonText("An error with the server response format has occurred, please try again in a few minutes");
           }
 
         }, (error) => {
           setButtonText('An error has occurred, please try again in a few minutes');
         });
+      }
     }
   }
 
