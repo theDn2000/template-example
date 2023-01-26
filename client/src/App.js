@@ -203,7 +203,7 @@ function App() {
         .then((res) => {
           console.log(res);
           try {
-            if (res === "yes") {
+            if (res.data === "yes") {
               setButtonText("Please, select the reset method");
               // Verify user changing the boolean
               userverified = true;
