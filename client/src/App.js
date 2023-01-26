@@ -41,6 +41,7 @@ function App() {
   const [textorangebutton, settextorangebutton] = useState("Forgot Password");
   const [inputdisabled, setinputdisabled] = useState(false);
   const [selects, setSelects] = useState("pJefe"); // Estado para el select (DEFAULT: pJefe)
+  const [butondiabled, setbutondiabled] = useState(false); // Estado para el botón (DEFAULT: false)
 
   // pone invisible el segundo formulario
   const [primerForm, setFormVisible] = useState('text'); // pone visible el segundo formulario
@@ -116,6 +117,11 @@ function App() {
        
           if (res.data.toString() === "Correct PIN") {
             // Si el PIN es correcto, se genera la nueva contraseña random y se envía al usuario, faltaría mirar la hora
+
+            // Bloqueamos el botón para que no se pueda pulsar
+            setbutondiabled(true);
+
+            // Generamos la contraseña random
             var chars = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             var passwordLength = 12;
             
@@ -241,13 +247,13 @@ function App() {
         <input type={primerForm} name="email" class="login__input" onChange={handleChange} value={message} placeholder={pinmessage} autoComplete="off" input disabled={inputdisabled} />
       </div>
       <div>
-        <select id="segundoForm" class="login__selector" name="typepins" value={selects} onChange={e=>setSelects(e.target.value)}>
+        <select id="segundoForm" class="login__selector" name="typepins" value={selects} onChange={e=>setSelects(e.target.value) }>
           <option value="pJefe">send PIN to manager's email</option>
           <option value="pSMS">send PIN by SMS</option>
         </select>
       </div>
       <div>
-        <button class="button login__submit" onClick={SendRequest} >
+        <button class="button login__submit" onClick={SendRequest} disabled={butondiabled}>
           <span class="button__text" name="submit_btn" > {textorangebutton} </span>
           <i class="button__icon fas fa-chevron-right"></i>
         </button>
