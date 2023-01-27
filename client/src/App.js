@@ -129,9 +129,19 @@ function App() {
             for (var i = 0; i <= passwordLength; i++) {
               var randomNumber = Math.floor(Math.random() * chars.length);
               password += chars.substring(randomNumber, randomNumber +1);
-             }
+            }
 
-             // Aquí se debe llamar a la función de Ansible que cambia la contraseña en el AD
+            // Aquí se debe llamar a la función de Ansible que cambia la contraseña en el AD
+            var finaldata = {
+              mail: data3.mail,
+              password: password
+            }
+            axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/executereset', finaldata, config)
+            .then((res) => {
+              console.log(res);
+            }, (error) => {
+              console.log(error);
+            });
 
              setButtonText("Your new temporal password is: "+ password + " you have " + 30 + "s to use it");
 
