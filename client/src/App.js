@@ -134,7 +134,7 @@ function App() {
             // Aquí se debe llamar a la función de Ansible que cambia la contraseña en el AD
             var finaldata = {
               mail: data3.mail,
-              password: password
+              generatedpassword: password
             }
             axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/executereset', finaldata, config)
             .then((res) => {
