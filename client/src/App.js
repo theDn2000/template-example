@@ -152,7 +152,7 @@ function App() {
         
 
       }, (error) => {
-        setButtonText('An error has occurred, please refresh the page and try again');
+        setButtonText('The PIN is not correct, please try again');
       });
       
     }
@@ -199,7 +199,7 @@ function App() {
         setButtonText('Please, introduce a valid email');
       }
       else {
-        axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/comprobarusuario', data, config)
+        axios.put('https://testpasswordapi.azure-api.net/testpasswordfunctions/comprobarusuario', data, config)
         .then((res) => {
           console.log(res);
           try {
