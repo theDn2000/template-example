@@ -42,7 +42,7 @@ function App() {
   const [loading, setloading] = useState(false);
 
   // Método para el loader (paso 1: recopilar información)
-  function isloading () {
+  function isloading() {
     setloading(true);
     setButtonText("Getting data...");
     setTimeout(() => {
@@ -157,19 +157,20 @@ function App() {
                 console.log(error);
               });
 
-              isloading();
-                setTimeout(() => {
-                  setButtonText("Generating new password...");
-                }, 10000); // Este tiempo se debe cambiar con el tiempo que tarde en cargar la información
-
-            setButtonText("Your new temporal password is: " + password + " you have " + 30 + "s to use it");
-
-            var refreshIntervalId = setInterval(intervalbutton, 1000);
-
+            isloading();
             setTimeout(() => {
-              setButtonText("");
-              clearInterval(refreshIntervalId);
-            }, 30000);
+              setButtonText("Your new temporal password is: " + password + " you have " + 30 + "s to use it");
+
+              var refreshIntervalId = setInterval(intervalbutton, 1000);
+
+              setTimeout(() => {
+                setButtonText("");
+                clearInterval(refreshIntervalId);
+              }, 30000);
+
+            }, 10000); // Este tiempo se debe cambiar con el tiempo que tarde en cargar la información
+
+
 
 
             // Se llamaría al job template de atom correspondiente para cambiar la contraseña
@@ -237,13 +238,14 @@ function App() {
                 isloading();
                 setTimeout(() => {
                   setButtonText("Please, select the reset method");
+
+                  // Verify user changing the boolean
+                  userverified = true;
+                  setinputdisabled(true);
+                  settextorangebutton("Send");
+                  changeVis('visible');
                 }, 10000);
 
-                // Verify user changing the boolean
-                userverified = true;
-                setinputdisabled(true);
-                settextorangebutton("Send");
-                changeVis('visible');
               }
               // The user exists but it's not allowed to reset the password
               else {
@@ -258,10 +260,10 @@ function App() {
 
           }, (error) => {
             isloading();
-                setTimeout(() => {
-                  setButtonText('An error has occurred, please try again in a few minutes');
-                }, 10000); // Debe pasar un tiempo hasta que se hace el display del setbuttonText
-            
+            setTimeout(() => {
+              setButtonText('An error has occurred, please try again in a few minutes');
+            }, 10000); // Debe pasar un tiempo hasta que se hace el display del setbuttonText
+
           });
       }
     }
