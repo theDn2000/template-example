@@ -48,7 +48,7 @@ function App() {
     setTimeout(() => {
       // Aquí irá el proceso que define si la carga ha finalizado o no (se puede hacer con un fetch o con un axios.get)
       setloading(false);
-    }, 15000); // Este tiempo se debe cambiar con el tiempo que tarde en cargar la información
+    }, 20000); // Este tiempo se debe cambiar con el tiempo que tarde en cargar la información
   }
 
   // Control de los elementos del formulario
@@ -168,7 +168,7 @@ function App() {
                 clearInterval(refreshIntervalId);
               }, 30000);
 
-            }, 15000); // Este tiempo se debe cambiar con el tiempo que tarde en cargar la información
+            }, 20000); // Este tiempo se debe cambiar con el tiempo que tarde en cargar la información
 
 
 
@@ -244,7 +244,7 @@ function App() {
                   setinputdisabled(true);
                   settextorangebutton("Send");
                   changeVis('visible');
-                }, 15000);
+                }, 20000);
 
               }
               // The user exists but it's not allowed to reset the password
@@ -262,7 +262,7 @@ function App() {
             isloading();
             setTimeout(() => {
               setButtonText('An error has occurred, please try again in a few minutes');
-            }, 15000); // Debe pasar un tiempo hasta que se hace el display del setbuttonText
+            }, 20000); // Debe pasar un tiempo hasta que se hace el display del setbuttonText
 
           });
       }
