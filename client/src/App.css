@@ -238,6 +238,12 @@ button:hover {
     -webkit-transform: translate3d(0, -3px, 0.01px);
     transform: translate3d(0, -3px, 0.01px);
 }
+
+/* Center the loader */
+.loader {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
     
 
 

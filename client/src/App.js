@@ -2,6 +2,7 @@ import logo from './flexlogo.svg';
 import './App.css';
 import axios from 'axios';
 import React, { useState } from 'react';
+import ReactLoading from "react-loading";
 
 
 // Initialize var data2
@@ -37,11 +38,27 @@ var password = "";
 
 function App() {
 
+  // Control del loader
+  const [loading, setloading] = useState(false);
+
+  // Método para el loader (paso 1: recopilar información)
+  function isloading () {
+    setloading(true);
+    setButtonText("Getting data...");
+    setTimeout(() => {
+      // Aquí irá el proceso que define si la carga ha finalizado o no (se puede hacer con un fetch o con un axios.get)
+      setloading(false);
+    }, 10000); // Este tiempo se debe cambiar con el tiempo que tarde en cargar la información
+  }
+
+  // Control de los elementos del formulario
   const [pokeid, setButtonText] = useState('');
   const [textorangebutton, settextorangebutton] = useState("Forgot Password");
   const [inputdisabled, setinputdisabled] = useState(false);
   const [selects, setSelects] = useState("pJefe"); // Estado para el select (DEFAULT: pJefe)
   const [butondiabled, setbutondiabled] = useState(false); // Estado para el botón (DEFAULT: false)
+
+
 
   // pone invisible el segundo formulario
   const [primerForm, setFormVisible] = useState('text'); // pone visible el segundo formulario
@@ -53,11 +70,10 @@ function App() {
 
   };
 
-  function intervalbutton()
-  {
-   // Your code here
-   // Parameters are purely optional.
-    setButtonText("Your new temporal password is: "+ password + " you have " + tiempo + "s to use it");
+  function intervalbutton() {
+    // Your code here
+    // Parameters are purely optional.
+    setButtonText("Your new temporal password is: " + password + " you have " + tiempo + "s to use it");
     tiempo--;
   }
   async function changeVis(type) {
@@ -69,7 +85,7 @@ function App() {
   }
 
 
-  
+
   async function SendRequest(event) {
     //const token = process.env['SNOW_INSTANCE_URL']; // Azure API Management subscription key
     event.preventDefault();
@@ -80,14 +96,12 @@ function App() {
       mail: message,
       method: selects
     }
-    if (!pinsent)
-    {
+    if (!pinsent) {
       data = {
         mail: message
       };
     }
-    else
-    {
+    else {
       //pin = {
       //  pin: message
       //};
@@ -100,7 +114,7 @@ function App() {
 
     const config = {
       headers: {
-        'Access-Control-Allow-Origin':'*',
+        'Access-Control-Allow-Origin': '*',
         //'Ocp-Apim-Subscription-Key': process.env.SUBSCRIPTION_KEY.toString() // No está definido, pendiente de revisar
         'Ocp-Apim-Subscription-Key': "2f8f065441ae4a80ab23f6b3cd9837b4"
       }
@@ -109,12 +123,12 @@ function App() {
     // Depending if the user is verified or not, the request when pressing the button will be different
     if (pinsent === true) {
       // Tercera vez que pulsas el botón
-      
+
       // Enviamos petición para que se compare el PIN introducido con el que se ha enviado (se envía sólo el mail a la petición)
       axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/getpin', data3, config) // Esta función nos debe decir si el pin es correcto o no AQUÍ HAY QUE PASARLE PIN Y NO DATA
-      .then((res) => {
-        console.log(res);
-       
+        .then((res) => {
+          console.log(res);
+
           if (res.data.toString() === "Correct PIN") {
             // Si el PIN es correcto, se genera la nueva contraseña random y se envía al usuario, faltaría mirar la hora
 
@@ -124,11 +138,11 @@ function App() {
             // Generamos la contraseña random
             var chars = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             var passwordLength = 12;
-            
+
 
             for (var i = 0; i <= passwordLength; i++) {
               var randomNumber = Math.floor(Math.random() * chars.length);
-              password += chars.substring(randomNumber, randomNumber +1);
+              password += chars.substring(randomNumber, randomNumber + 1);
             }
 
             // Aquí se debe llamar a la función de Ansible que cambia la contraseña en el AD
@@ -137,13 +151,18 @@ function App() {
               generatedpassword: password
             }
             axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/executereset', finaldata, config)
-            .then((res) => {
-              console.log(res);
-            }, (error) => {
-              console.log(error);
-            });
+              .then((res) => {
+                console.log(res);
+              }, (error) => {
+                console.log(error);
+              });
 
-             setButtonText("Your new temporal password is: "+ password + " you have " + 30 + "s to use it");
+              isloading();
+                setTimeout(() => {
+                  setButtonText("Generating new password...");
+                }, 10000); // Este tiempo se debe cambiar con el tiempo que tarde en cargar la información
+
+            setButtonText("Your new temporal password is: " + password + " you have " + 30 + "s to use it");
 
             var refreshIntervalId = setInterval(intervalbutton, 1000);
 
@@ -158,13 +177,13 @@ function App() {
           else {
             setButtonText("The PIN is not correct, please try again");
           }
-       
-        
 
-      }, (error) => {
-        setButtonText('The PIN is not correct, please try again');
-      });
-      
+
+
+        }, (error) => {
+          setButtonText('The PIN is not correct, please try again');
+        });
+
     }
     else if (userverified === true) {
       // Segunda vez que pulsas el botón
@@ -173,10 +192,10 @@ function App() {
           console.log(res);
           setPinMessage('Pin');
           changeVis('hidden');
-          
+
           setFormVisible('visible');
           setinputdisabled(false);
-          
+
           setButtonText("A pin has been sent, please introduce it in the box to reset your password");
           setMessage("");
           pinsent = true;
@@ -189,7 +208,7 @@ function App() {
           //setButtonText('An error has occurred, please refresh the page and try again');
           setPinMessage('Pin');
           changeVis('hidden');
-          
+
           setFormVisible('visible');
           setButtonText("A pin has been sent, please introduce it in the box to reset your password");
           setMessage("");
@@ -210,81 +229,139 @@ function App() {
       }
       else {
         axios.put('https://testpasswordapi.azure-api.net/testpasswordfunctions/comprobarusuario', data, config)
-        .then((res) => {
-          console.log(res);
-          try {
-            if (res.data === "Yes") {
-              setButtonText("Please, select the reset method");
-              // Verify user changing the boolean
-              userverified = true;
-              setinputdisabled(true);
-              settextorangebutton("Send");
-              changeVis('visible');
-            }
-            // The user exists but it's not allowed to reset the password
-            else {
-              setButtonText("The response from the server is unexpected, please try again in a few minutes");
-              // Create a new boolean to check if the verification is fake or not (?)
-            }
-          }
-          // The user does not exist but for security reasons we don't want to show it
-          catch (error) {
-            setButtonText("An error with the server response format has occurred, please try again in a few minutes");
-          }
+          .then((res) => {
+            console.log(res);
+            try {
+              if (res.data === "Yes") {
+                // Wait until the loading is finished
+                isloading();
+                setTimeout(() => {
+                  setButtonText("Please, select the reset method");
+                }, 10000);
 
-        }, (error) => {
-          setButtonText('An error has occurred, please try again in a few minutes');
-        });
+                // Verify user changing the boolean
+                userverified = true;
+                setinputdisabled(true);
+                settextorangebutton("Send");
+                changeVis('visible');
+              }
+              // The user exists but it's not allowed to reset the password
+              else {
+                setButtonText("The response from the server is unexpected, please try again in a few minutes");
+                // Create a new boolean to check if the verification is fake or not (?)
+              }
+            }
+            // The user does not exist but for security reasons we don't want to show it
+            catch (error) {
+              setButtonText("An error with the server response format has occurred, please try again in a few minutes");
+            }
+
+          }, (error) => {
+            isloading();
+                setTimeout(() => {
+                  setButtonText('An error has occurred, please try again in a few minutes');
+                }, 10000); // Debe pasar un tiempo hasta que se hace el display del setbuttonText
+            
+          });
       }
     }
   }
 
+  // Determinamos si la pag está cargada o no
+  if (loading === true) {
 
-  return (
-<div className="App">
+    return (
+      <div className="App">
 
-<header className="App-header">
-  <img src={logo} className="App-logo" alt="logo" />
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
 
-  <form class="login" onSubmit={handleSubmit} method="post">
+          <form class="login" onSubmit={handleSubmit} method="post">
 
-    <div class="login__field">
-      <i class="login__icon fas fa-user"></i>
-      <div>
-        <input type={primerForm} name="email" class="login__input" onChange={handleChange} value={message} placeholder={pinmessage} autoComplete="off" input disabled={inputdisabled} />
+            <div class="login__field">
+              <i class="login__icon fas fa-user"></i>
+              <div>
+                <input type={primerForm} name="email" class="login__input" onChange={handleChange} value={message} placeholder={pinmessage} autoComplete="off" input disabled={inputdisabled} />
+              </div>
+
+              <div>
+                <select id="segundoForm" class="login__selector" name="typepins" value={selects} onChange={e => setSelects(e.target.value)}>
+                  <option value="pJefe">send PIN to manager's email</option>
+                  <option value="pSMS">send PIN by SMS</option>
+                </select>
+              </div>
+              <ReactLoading class="loader" type={"bars"} color={"#ffffff"} height={70} width={37} />
+            </div>
+            <div class="login__field">
+              <div id="captcha" class="g-recaptcha" data-sitekey="6LeszrQjAAAAAOe0tVYAt-DTNixnqPkbpeWUo9tt" />
+            </div>
+          </form>
+
+
+          <a
+            className="App-link"
+            href="https://www.flexxible.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {pokeid}
+          </a>
+          <script src="https://www.google.com/recaptcha/api.js" async defer />
+        </header>
       </div>
-      <div>
-        <select id="segundoForm" class="login__selector" name="typepins" value={selects} onChange={e=>setSelects(e.target.value) }>
-          <option value="pJefe">send PIN to manager's email</option>
-          <option value="pSMS">send PIN by SMS</option>
-        </select>
+
+    )
+  }
+  else {
+
+    return (
+
+      <div className="App">
+
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+
+          <form class="login" onSubmit={handleSubmit} method="post">
+
+            <div class="login__field">
+              <i class="login__icon fas fa-user"></i>
+              <div>
+                <input type={primerForm} name="email" class="login__input" onChange={handleChange} value={message} placeholder={pinmessage} autoComplete="off" input disabled={inputdisabled} />
+              </div>
+
+              <div>
+                <select id="segundoForm" class="login__selector" name="typepins" value={selects} onChange={e => setSelects(e.target.value)}>
+                  <option value="pJefe">send PIN to manager's email</option>
+                  <option value="pSMS">send PIN by SMS</option>
+                </select>
+              </div>
+              <div>
+                <button class="button login__submit" onClick={SendRequest} disabled={butondiabled}>
+                  <span class="button__text" name="submit_btn" > {textorangebutton} </span>
+                  <i class="button__icon fas fa-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="login__field">
+              <div id="captcha" class="g-recaptcha" data-sitekey="6LeszrQjAAAAAOe0tVYAt-DTNixnqPkbpeWUo9tt" />
+            </div>
+          </form>
+
+
+          <a
+            className="App-link"
+            href="https://www.flexxible.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {pokeid}
+          </a>
+          <script src="https://www.google.com/recaptcha/api.js" async defer />
+        </header>
       </div>
-      <div>
-        <button class="button login__submit" onClick={SendRequest} disabled={butondiabled}>
-          <span class="button__text" name="submit_btn" > {textorangebutton} </span>
-          <i class="button__icon fas fa-chevron-right"></i>
-        </button>
-      </div>
-    </div>
-
-    <div class="login__field">
-      <div id="captcha" class="g-recaptcha" data-sitekey="6LeszrQjAAAAAOe0tVYAt-DTNixnqPkbpeWUo9tt" />
-    </div>
-  </form>
-
-
-  <a
-    className="App-link"
-    href="https://www.flexxible.com"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    {pokeid}
-  </a>
-  <script src= "https://www.google.com/recaptcha/api.js" async defer />
-</header>
-</div>
-);
+    );
+  }
 }
 
 
