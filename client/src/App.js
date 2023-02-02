@@ -40,7 +40,6 @@ function App() {
 
   // Control del loader
   const [loading, setloading] = useState(false);
-  const [pinloading , setpinloading] = useState(false);
 
   // Método para el loader (paso 1: recopilar información)
   function isloading() {
