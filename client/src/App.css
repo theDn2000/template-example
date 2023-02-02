@@ -16,6 +16,7 @@
   
 }
 .g-recaptcha {
+  visibility: hidden; /* hide the captcha (Mostratlo cuando funcione correctamente) */
   margin: auto;
   width: 125px;
   position: relative;	

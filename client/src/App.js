@@ -57,7 +57,7 @@ function App() {
     setpinloading(true);
     setButtonText("Checking PIN...");
     setTimeout(() => {
-      setloading(false);
+      setpinloading(false);
     }, 1000); 
   }
 
@@ -183,16 +183,23 @@ function App() {
           }
           // Si el status es 403, el PIN es incorrecto y no se puede cambiar la contraseña hasta dentro de 24 horas
           else if (res.data.toString() === "Incorrect PIN") {
-            setButtonText("The PIN is not correct, please try again");
+            setTimeout(() => {
+              setButtonText("The PIN is not correct, please try again");
+            }, 1000);
+            
           }
           else {
-            setButtonText("You introduced the wrong PIN 3 times, you can't change your password until 24 hours have passed");
+            setTimeout(() => {
+              setButtonText("You introduced the wrong PIN 3 times, you can't change your password until 24 hours have passed");
+            }, 1000);
           }
 
 
 
         }, (error) => {
-          setButtonText("You introduced the wrong PIN 3 times, you can't change your password until 24 hours have passed");
+          setTimeout(() => {
+            setButtonText("You introduced the wrong PIN 3 times, you can't change your password until 24 hours have passed");
+          }, 1000);
         });
 
     }
