@@ -52,15 +52,6 @@ function App() {
     }, 20000); // Este tiempo se debe cambiar con el tiempo que tarde en cargar la información
   }
 
-  // Método para el loader (tiempo entre PINS)
-  function ispinloading() {
-    setpinloading(true);
-    setButtonText("Checking PIN...");
-    setTimeout(() => {
-      setpinloading(false);
-    }, 1000); 
-  }
-
 
   // Control de los elementos del formulario
   const [pokeid, setButtonText] = useState('');
@@ -134,7 +125,7 @@ function App() {
     // Depending if the user is verified or not, the request when pressing the button will be different
     if (pinsent === true) {
       // Tercera vez que pulsas el botón
-      
+
       // Enviamos petición para que se compare el PIN introducido con el que se ha enviado (se envía sólo el mail a la petición)
       axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/getpin', data3, config) // Esta función nos debe decir si el pin es correcto o no AQUÍ HAY QUE PASARLE PIN Y NO DATA
         .then((res) => {
@@ -287,7 +278,7 @@ function App() {
   }
 
   // Determinamos si la pag está cargada o no (isLoading or ispinloading)
-  if (loading === true || pinloading === true) {
+  if (loading === true) {
 
     return (
       <div className="App">
