@@ -169,11 +169,10 @@ function App() {
               }, 30000);
 
             }, 20000); // Este tiempo se debe cambiar con el tiempo que tarde en cargar la información
-
-
-
-
-            // Se llamaría al job template de atom correspondiente para cambiar la contraseña
+          }
+          // Si el status es 403, el PIN es incorrecto y no se puede cambiar la contraseña hasta dentro de 24 horas
+          else if (res.status === 403) {
+            setButtonText("You introduced the wrong PIN 3 times, you can't change your password until 24 hours have passed");
           }
           else {
             setButtonText("The PIN is not correct, please try again");
