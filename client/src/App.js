@@ -171,7 +171,7 @@ function App() {
             }, 20000); // Este tiempo se debe cambiar con el tiempo que tarde en cargar la información
           }
           // Si el status es 403, el PIN es incorrecto y no se puede cambiar la contraseña hasta dentro de 24 horas
-          else if (res.data.toString() === "Correct PIN") {
+          else if (res.data.toString() === "Incorrect PIN") {
             setButtonText("The PIN is not correct, please try again");
           }
           else {
