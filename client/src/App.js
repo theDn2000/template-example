@@ -279,8 +279,8 @@ function App() {
     }
   }
 
-  // Determinamos si la pag está cargada o no
-  if (loading === true) {
+  // Determinamos si la pag está cargada o no (isLoading or ispinloading)
+  if (loading === true || pinloading === true) {
 
     return (
       <div className="App">
