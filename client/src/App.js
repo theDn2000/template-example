@@ -290,7 +290,7 @@ function App() {
   }
 
   // Determinamos si la pag está cargada o no (isLoading or ispinloading)
-  if (loading === true) {
+  if (loading === true || delay === true) {
 
     return (
       <div className="App">
