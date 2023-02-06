@@ -186,13 +186,13 @@ function App() {
           else if (res.data.toString() === "Incorrect PIN") {
             setTimeout(() => {
               setButtonText("The PIN is not correct, please try again");
-            }, 1000);
+            }, 3000);
             
           }
           else {
             setTimeout(() => {
               setButtonText("You introduced the wrong PIN 3 times, you can't change your password until 24 hours have passed");
-            }, 1000);
+            }, 3000);
           }
 
 
@@ -200,7 +200,7 @@ function App() {
         }, (error) => {
           setTimeout(() => {
             setButtonText("You introduced the wrong PIN 3 times, you can't change your password until 24 hours have passed");
-          }, 1000);
+          }, 3000);
         });
 
     }
