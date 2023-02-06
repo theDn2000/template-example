@@ -56,10 +56,10 @@ function App() {
 
   function delayantispam() {
     setDelay(true);
-    settextorangebutton("");
+    setButtonText("");
     setTimeout(() => {
       setDelay(false);
-    }, 1000);
+    }, 3000);
   }
 
   // Control de los elementos del formulario
