@@ -48,9 +48,19 @@ function App() {
     setTimeout(() => {
       // Aquí irá el proceso que define si la carga ha finalizado o no (se puede hacer con un fetch o con un axios.get)
       setloading(false);
-    }, 20000); // Este tiempo se debe cambiar con el tiempo que tarde en cargar la información
+    }, 22000); // Este tiempo se debe cambiar con el tiempo que tarde en cargar la información
   }
 
+  // Control del tiempo anti spam del botón
+  const [delay, setDelay] = useState(false);
+
+  function delayantispam() {
+    setDelay(true);
+    settextorangebutton("");
+    setTimeout(() => {
+      setDelay(false);
+    }, 1000);
+  }
 
   // Control de los elementos del formulario
   const [pokeid, setButtonText] = useState('');
@@ -124,6 +134,7 @@ function App() {
     // Depending if the user is verified or not, the request when pressing the button will be different
     if (pinsent === true) {
       // Tercera vez que pulsas el botón
+      delayantispam();
 
       // Enviamos petición para que se compare el PIN introducido con el que se ha enviado (se envía sólo el mail a la petición)
       axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/getpin', data3, config) // Esta función nos debe decir si el pin es correcto o no AQUÍ HAY QUE PASARLE PIN Y NO DATA
@@ -269,7 +280,6 @@ function App() {
             }
 
           }, (error) => {
-            isloading();
             setTimeout(() => {
               setButtonText('An error has occurred, please try again in a few minutes');
             }, 20000); // Debe pasar un tiempo hasta que se hace el display del setbuttonText
