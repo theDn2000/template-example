@@ -48,7 +48,7 @@ function App() {
     setTimeout(() => {
       // Aquí irá el proceso que define si la carga ha finalizado o no (se puede hacer con un fetch o con un axios.get)
       setloading(false);
-    }, 22000); // Este tiempo se debe cambiar con el tiempo que tarde en cargar la información
+    }, 30000); // Este tiempo se debe cambiar con el tiempo que tarde en cargar la información
   }
 
   // Control del tiempo anti spam del botón
@@ -56,7 +56,7 @@ function App() {
 
   function delayantispam() {
     setDelay(true);
-    setButtonText("");
+    setButtonText("Checking...");
     setTimeout(() => {
       setDelay(false);
     }, 3000);
@@ -262,27 +262,27 @@ function App() {
                   setinputdisabled(true);
                   settextorangebutton("Send");
                   changeVis('visible');
-                }, 20000);
+                }, 28000);
 
               }
               // The user exists but it's not allowed to reset the password
               else {
                 setTimeout(() => {
                   setButtonText("The response from the server is unexpected, please try again in a few minutes");
-                }, 20000);
+                }, 28000);
               }
             }
             // The user does not exist but for security reasons we don't want to show it
             catch (error) {
               setTimeout(() => {
                 setButtonText("An error with the server response format has occurred, please try again in a few minutes");
-              }, 20000);
+              }, 28000);
             }
 
           }, (error) => {
             setTimeout(() => {
               setButtonText('An error has occurred, please try again in a few minutes');
-            }, 20000); // Debe pasar un tiempo hasta que se hace el display del setbuttonText
+            }, 28000); // Debe pasar un tiempo hasta que se hace el display del setbuttonText
 
           });
       }
