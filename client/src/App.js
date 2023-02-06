@@ -231,18 +231,18 @@ function App() {
 
     else {
       // Primera vez que pulsas el botón
-      // If mail does not contain @ or .com, the API returns an error
-      if (data.mail.indexOf("@") === -1 || data.mail.indexOf(".com") === -1) {
+      // If mail does not contain @ or .something, the API returns an error
+      if (data.mail.indexOf("@") === -1 || data.mail.indexOf(".") === -1) {
         setButtonText('Please, introduce a valid email');
       }
       else {
+        isloading();
         axios.put('https://testpasswordapi.azure-api.net/testpasswordfunctions/comprobarusuario', data, config)
           .then((res) => {
             console.log(res);
             try {
               if (res.data === "Yes") {
                 // Wait until the loading is finished
-                isloading();
                 setTimeout(() => {
                   setButtonText("Please, select the reset method");
 
@@ -256,13 +256,16 @@ function App() {
               }
               // The user exists but it's not allowed to reset the password
               else {
-                setButtonText("The response from the server is unexpected, please try again in a few minutes");
-                // Create a new boolean to check if the verification is fake or not (?)
+                setTimeout(() => {
+                  setButtonText("The response from the server is unexpected, please try again in a few minutes");
+                }, 20000);
               }
             }
             // The user does not exist but for security reasons we don't want to show it
             catch (error) {
-              setButtonText("An error with the server response format has occurred, please try again in a few minutes");
+              setTimeout(() => {
+                setButtonText("An error with the server response format has occurred, please try again in a few minutes");
+              }, 20000);
             }
 
           }, (error) => {
