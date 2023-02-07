@@ -258,6 +258,7 @@ function App() {
                     console.log(res);
                     if (res.data === "pTel method") {
                       setemailmethod(true);
+                      setSelects("pSMS")
                     }
                     else if (res.data === "pJefe method") {
                       settelephonemethod(true);
