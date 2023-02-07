@@ -3,6 +3,7 @@ import './App.css';
 import axios from 'axios';
 import React, { useState } from 'react';
 import ReactLoading from "react-loading";
+import Methods from './methods.js';
 
 
 // Initialize var data2
@@ -253,10 +254,18 @@ function App() {
             console.log(res);
             try {
               if (res.data === "Yes") {
+                // Call the api to get the methods
+                axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/getmethods', data, config)
+                  .then((res) => {
+                    console.log(res);
+                    // Call the function methods to change the visibility of the methods
+                    methods(res.data);
+                  }, (error) => {
+                    console.log(error);
+                  });
                 // Wait until the loading is finished
                 setTimeout(() => {
                   setButtonText("Please, select the reset method");
-
                   // Verify user changing the boolean
                   userverified = true;
                   setinputdisabled(true);
@@ -307,10 +316,7 @@ function App() {
               </div>
 
               <div>
-                <select id="segundoForm" class="login__selector" name="typepins" value={selects} onChange={e => setSelects(e.target.value)}>
-                  <option value="pJefe">send PIN to manager's email</option>
-                  <option value="pSMS">send PIN by SMS</option>
-                </select>
+                <methods></methods>
               </div>
               <ReactLoading class="loader" type={"bars"} color={"#ffffff"} height={70} width={37} />
             </div>
@@ -352,10 +358,7 @@ function App() {
               </div>
 
               <div>
-                <select id="segundoForm" class="login__selector" name="typepins" value={selects} onChange={e => setSelects(e.target.value)}>
-                  <option value="pJefe">send PIN to manager's email</option>
-                  <option value="pSMS">send PIN by SMS</option>
-                </select>
+                <Methods></Methods>
               </div>
               <div>
                 <button class="button login__submit" onClick={SendRequest} disabled={butondiabled}>
