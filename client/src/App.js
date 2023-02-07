@@ -3,7 +3,7 @@ import './App.css';
 import axios from 'axios';
 import React, { useState } from 'react';
 import ReactLoading from "react-loading";
-import Methods from './methods.js';
+import methods from './methods.js';
 
 
 // Initialize var data2
