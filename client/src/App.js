@@ -29,10 +29,6 @@ var data3 = {
   pin: ""
 };
 
-//var pin = {
-//  mail: ""
-//};
-
 var tiempo = 29;
 var password = "";
 
@@ -62,45 +58,15 @@ function App() {
     }, 3000);
   }
 
-  // Control de las opciones de reseteo
-  async function GetMethods(method) {
-
-    // Depending on the response, the options will be different
-    if (method.toString() === "All methods") {
-      return (
-        <option value="pJefe">send PIN to manager's email</option>,
-        <option value="pSMS">send PIN by SMS</option>
-      )
-
-    }
-    else if (method.toString() === "pTel") {
-      return (
-        <option value="pSMS">send PIN by SMS</option>
-      )
-
-    }
-    else if (method.toString() === "pJefe") {
-      return (
-        <option value="pJefe">send PIN to manager's email</option>
-      )
-
-    }
-    else {
-      return (
-        <option value="pJefe">send PIN to manager's email</option>,
-        <option value="pSMS">send PIN by SMS</option>
-      )
-    }
-
-
-  }
-
   // Control de los elementos del formulario
   const [pokeid, setButtonText] = useState('');
   const [textorangebutton, settextorangebutton] = useState("Forgot Password");
   const [inputdisabled, setinputdisabled] = useState(false);
   const [selects, setSelects] = useState("pJefe"); // Estado para el select (DEFAULT: pJefe)
   const [butondiabled, setbutondiabled] = useState(false); // Estado para el botón (DEFAULT: false)
+  const [telephonemethod, settelephonemethod] = useState(false); // Estado para el select 
+  const [emailmethod, setemailmethod] = useState(false); // Estado para el select
+
 
 
 
@@ -220,7 +186,7 @@ function App() {
             setTimeout(() => {
               setButtonText("The PIN is not correct, please try again");
             }, 2500);
-
+            
           }
           else {
             setTimeout(() => {
@@ -286,17 +252,23 @@ function App() {
             console.log(res);
             try {
               if (res.data === "Yes") {
+                // Ask the api for the reset possible options
                 axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/getmethods', data, config)
                   .then((res) => {
                     console.log(res);
-                    // Call the function methods to change the visibility of the methods
+                    if (res.data === "pTlf") {
+                      setemailmethod(true);
+                    }
+                    else if (res.data === "pMail") {
+                      settelephonemethod(true);
+                    }
                   }, (error) => {
                     console.log(error);
                   });
-                GetMethods(res.data)
                 // Wait until the loading is finished
                 setTimeout(() => {
                   setButtonText("Please, select the reset method");
+
                   // Verify user changing the boolean
                   userverified = true;
                   setinputdisabled(true);
@@ -348,7 +320,8 @@ function App() {
 
               <div>
                 <select id="segundoForm" class="login__selector" name="typepins" value={selects} onChange={e => setSelects(e.target.value)}>
-                  <GetMethods />
+                  <option value="pJefe">send PIN to manager's email</option>
+                  <option value="pSMS">send PIN by SMS</option>
                 </select>
               </div>
               <ReactLoading class="loader" type={"bars"} color={"#ffffff"} height={70} width={37} />
@@ -392,7 +365,8 @@ function App() {
 
               <div>
                 <select id="segundoForm" class="login__selector" name="typepins" value={selects} onChange={e => setSelects(e.target.value)}>
-                  <GetMethods/>
+                  <option value="pJefe" disabled={emailmethod} >send PIN to manager's email</option>
+                  <option value="pSMS" disabled={telephonemethod}>send PIN by SMS</option>
                 </select>
               </div>
               <div>
