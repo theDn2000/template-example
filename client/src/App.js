@@ -3,7 +3,6 @@ import './App.css';
 import axios from 'axios';
 import React, { useState } from 'react';
 import ReactLoading from "react-loading";
-import methods from './methods.js';
 
 
 // Initialize var data2
@@ -61,6 +60,39 @@ function App() {
     setTimeout(() => {
       setDelay(false);
     }, 3000);
+  }
+
+  // Control de las opciones de reseteo
+  async function GetMethods(method) {
+
+    // Depending on the response, the options will be different
+    if (method.toString() === "All methods") {
+      return (
+        <option value="pJefe">send PIN to manager's email</option>,
+        <option value="pSMS">send PIN by SMS</option>
+      )
+
+    }
+    else if (method.toString() === "pTel") {
+      return (
+        <option value="pSMS">send PIN by SMS</option>
+      )
+
+    }
+    else if (method.toString() === "pJefe") {
+      return (
+        <option value="pJefe">send PIN to manager's email</option>
+      )
+
+    }
+    else {
+      return (
+        <option value="pJefe">send PIN to manager's email</option>,
+        <option value="pSMS">send PIN by SMS</option>
+      )
+    }
+
+
   }
 
   // Control de los elementos del formulario
@@ -188,7 +220,7 @@ function App() {
             setTimeout(() => {
               setButtonText("The PIN is not correct, please try again");
             }, 2500);
-            
+
           }
           else {
             setTimeout(() => {
@@ -254,15 +286,14 @@ function App() {
             console.log(res);
             try {
               if (res.data === "Yes") {
-                // Call the api to get the methods
                 axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/getmethods', data, config)
                   .then((res) => {
                     console.log(res);
                     // Call the function methods to change the visibility of the methods
-                    methods(res.data);
                   }, (error) => {
                     console.log(error);
                   });
+                GetMethods(res.data)
                 // Wait until the loading is finished
                 setTimeout(() => {
                   setButtonText("Please, select the reset method");
@@ -316,7 +347,9 @@ function App() {
               </div>
 
               <div>
-                <methods></methods>
+                <select id="segundoForm" class="login__selector" name="typepins" value={selects} onChange={e => setSelects(e.target.value)}>
+                  <GetMethods />
+                </select>
               </div>
               <ReactLoading class="loader" type={"bars"} color={"#ffffff"} height={70} width={37} />
             </div>
@@ -358,7 +391,9 @@ function App() {
               </div>
 
               <div>
-                <Methods></Methods>
+                <select id="segundoForm" class="login__selector" name="typepins" value={selects} onChange={e => setSelects(e.target.value)}>
+                  <GetMethods/>
+                </select>
               </div>
               <div>
                 <button class="button login__submit" onClick={SendRequest} disabled={butondiabled}>
