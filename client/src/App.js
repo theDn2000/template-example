@@ -256,10 +256,10 @@ function App() {
                 axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/getmethods', data, config)
                   .then((res) => {
                     console.log(res);
-                    if (res.data === "pTlf") {
+                    if (res.data === "pTel method") {
                       setemailmethod(true);
                     }
-                    else if (res.data === "pMail") {
+                    else if (res.data === "pJefe method") {
                       settelephonemethod(true);
                     }
                   }, (error) => {
