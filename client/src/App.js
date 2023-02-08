@@ -186,7 +186,7 @@ function App() {
             setTimeout(() => {
               setButtonText("The PIN is not correct, please try again");
             }, 2500);
-            
+
           }
           else {
             setTimeout(() => {
@@ -252,24 +252,23 @@ function App() {
             console.log(res);
             try {
               if (res.data === "Yes") {
-                // Ask the api for the reset possible options
-                axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/getmethods', data, config)
-                  .then((res) => {
-                    console.log(res);
-                    if (res.data === "pTel method") {
-                      setemailmethod(true);
-                      setSelects("pSMS")
-                    }
-                    else if (res.data === "pJefe method") {
-                      settelephonemethod(true);
-                    }
-                  }, (error) => {
-                    console.log(error);
-                  });
                 // Wait until the loading is finished
                 setTimeout(() => {
+                  // Ask the api for the reset possible options
+                  axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/getmethods', data, config)
+                    .then((res) => {
+                      console.log(res);
+                      if (res.data === "pTel method") {
+                        setemailmethod(true);
+                        setSelects("pSMS")
+                      }
+                      else if (res.data === "pJefe method") {
+                        settelephonemethod(true);
+                      }
+                    }, (error) => {
+                      console.log(error);
+                    });
                   setButtonText("Please, select the reset method");
-
                   // Verify user changing the boolean
                   userverified = true;
                   setinputdisabled(true);
