@@ -163,9 +163,9 @@ function App() {
             }
             axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/executereset', finaldata, config)
               .then((res) => {
-                console.log(res);
+                
               }, (error) => {
-                console.log(error);
+                
               });
 
             isloading();
@@ -207,7 +207,7 @@ function App() {
       // Segunda vez que pulsas el botón
       axios.put('https://testpasswordapi.azure-api.net/testpasswordfunctions/generate-pin', data2, config) //En esta función se genera el pin y se envía al usuario por el método seleccionado
         .then((res) => {
-          console.log(res);
+          
           setPinMessage('Pin');
           changeVis('hidden');
 
@@ -266,7 +266,7 @@ function App() {
                         settelephonemethod(true);
                       }
                     }, (error) => {
-                      console.log(error);
+                      
                     });
                   setButtonText("Please, select the reset method");
                   // Verify user changing the boolean
@@ -385,12 +385,17 @@ function App() {
 
           <a
             className="App-link"
-            href="https://www.flexxible.com"
             target="_blank"
             rel="noopener noreferrer"
           >
             {pokeid}
           </a>
+          <button class="button login__submit" onClick={() => {navigator.clipboard.writeText(this.state.password)}} disabled={!butondiabled}>
+            <span class="button__text" name="submit_btn" > copy </span>
+            <i class="button__icon fas fa-chevron-right"></i>
+          </button>
+            
+          
           <script src="https://www.google.com/recaptcha/api.js" async defer />
         </header>
       </div>
