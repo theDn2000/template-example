@@ -6,7 +6,9 @@
   height: 40vmin;
   pointer-events: none;
 }
-
+#botonCopy {
+  visibility: hidden;
+}
 #segundoForm {
   visibility: hidden;
 }

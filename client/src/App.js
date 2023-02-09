@@ -394,7 +394,7 @@ function App() {
           >
             {pokeid}
           </a>
-          <button class="button login__submit" id="botonCopy" hidden onClick={() => {navigator.clipboard.writeText(this.state.password)}} >
+          <button class="button login__submit" id="botonCopy"  onClick={() => {navigator.clipboard.writeText(this.state.password)}} >
             <span class="button__text" name="submit_btn" > copy </span>
             <i class="button__icon fas fa-chevron-right"></i>
           </button>
