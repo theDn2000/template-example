@@ -64,7 +64,7 @@ function App() {
   const [inputdisabled, setinputdisabled] = useState(false);
   const [selects, setSelects] = useState("pJefe"); // Estado para el select (DEFAULT: pJefe)
   const [butondiabled, setbutondiabled] = useState(false);
-  const [butonCopyDisabled, setbutonCopydiabled] = useState(true); // Estado para el botón copy (DEFAULT: true)
+   
   const [telephonemethod, settelephonemethod] = useState(false); // Estado para el select 
   const [emailmethod, setemailmethod] = useState(false); // Estado para el select
 
@@ -170,7 +170,7 @@ function App() {
               });
 
             isloading();
-            setbutonCopydiabled(false);
+            document.getElementById('botonCopy').style.visibility = 'visible';
             setTimeout(() => {
               setButtonText("Your new temporal password is: " + password + " you have " + 30 + "s to use it");
               
@@ -392,7 +392,7 @@ function App() {
           >
             {pokeid}
           </a>
-          <button class="button login__submit" onClick={() => {navigator.clipboard.writeText(this.state.password)}} disabled={butonCopyDisabled}>
+          <button class="button login__submit" id="botonCopy" hidden onClick={() => {navigator.clipboard.writeText(this.state.password)}} >
             <span class="button__text" name="submit_btn" > copy </span>
             <i class="button__icon fas fa-chevron-right"></i>
           </button>
