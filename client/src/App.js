@@ -338,11 +338,13 @@ function App() {
           <a
             className="App-link"
             href="https://www.flexxible.com"
-            target="_blank"
-            rel="noopener noreferrer"
           >
             {pokeid}
           </a>
+          <button class="button login__submit" id="botonCopy" hidden onClick={() => {navigator.clipboard.writeText(this.state.password)}} >
+            <span class="button__text" name="submit_btn" > copy </span>
+            <i class="button__icon fas fa-chevron-right"></i>
+          </button>
           <script src="https://www.google.com/recaptcha/api.js" async defer />
         </header>
       </div>
