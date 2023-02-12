@@ -179,6 +179,7 @@ function App() {
 
               setTimeout(() => {
                 setButtonText("");
+                document.getElementById('botonCopy').style.visibility = 'hidden';
                 clearInterval(refreshIntervalId);
               }, 30000);
 

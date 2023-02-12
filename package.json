@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "axios": "^1.2.4",
+    "nodemailer": "^6.9.1",
+    "plivo": "^4.38.0"
+  }
+}
