@@ -330,9 +330,6 @@ function App() {
               </div>
               <ReactLoading class="loader" type={"bars"} color={"#ffffff"} height={70} width={37} />
             </div>
-            <div class="login__field">
-              <div id="captcha" class="g-recaptcha" data-sitekey="6LeszrQjAAAAAOe0tVYAt-DTNixnqPkbpeWUo9tt" />
-            </div>
           </form>
 
 
