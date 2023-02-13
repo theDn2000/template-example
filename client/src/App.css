@@ -7,7 +7,7 @@
   pointer-events: none;
 }
 #botonCopy {
-  visibility: visible;
+  visibility: hidden;
 }
 #segundoForm {
   visibility: hidden;
