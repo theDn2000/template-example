@@ -48,12 +48,12 @@ function App() {
     }, 10000);
     setTimeout(() => {
       setButtonText("Getting data...");
-    }, 10000);
+    }, 20000);
 
     setTimeout(() => {
       // Aquí irá el proceso que define si la carga ha finalizado o no (se puede hacer con un fetch o con un axios.get)
       setloading(false);
-    }, 10000); // Este tiempo se debe cambiar con el tiempo que tarde en cargar la información
+    }, 30000); // Este tiempo se debe cambiar con el tiempo que tarde en cargar la información
   }
 
   // Control del tiempo anti spam del botón
