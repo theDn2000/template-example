@@ -383,9 +383,7 @@ function App() {
               </div>
             </div>
 
-            <div class="login__field">
-              <div id="captcha" class="g-recaptcha" data-sitekey="6LeszrQjAAAAAOe0tVYAt-DTNixnqPkbpeWUo9tt" />
-            </div>
+            
           </form>
 
 
@@ -395,8 +393,8 @@ function App() {
           >
             {pokeid}
           </a>
-          <button class="button login__submit" id="botonCopy"  onClick={() => {navigator.clipboard.writeText(password)}} >
-            <span class="button__text" name="submit_btn" > copy </span>
+          <button class="login__submit_2" id="botonCopy"  onClick={() => {navigator.clipboard.writeText(password)}} >
+            <span class="button__text" name="submit_btn" > Copy to clipboard </span>
             <i class="button__icon fas fa-chevron-right"></i>
           </button>
             
