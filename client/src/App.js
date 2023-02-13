@@ -93,7 +93,7 @@ function App() {
   function intervalbutton() {
     // Your code here
     // Parameters are purely optional.
-    setButtonText("Your new temporal password is: " + password + " you have " + tiempo + "s to use it");
+    setButtonText("Your new temporal password is: " + password + " you have " + tiempo + "s to copy it");
     tiempo--;
   }
   async function changeVis(type) {
