@@ -40,11 +40,20 @@ function App() {
   // Método para el loader (paso 1: recopilar información)
   function isloading() {
     setloading(true);
+    // Display some random text while the information is being loaded
     setButtonText("Loading...");
+    setTimeout(() => {
+      // Display another random text while the information is being loaded
+      setButtonText("Updating information...");
+    }, 10000);
+    setTimeout(() => {
+      setButtonText("Getting data...");
+    }, 10000);
+
     setTimeout(() => {
       // Aquí irá el proceso que define si la carga ha finalizado o no (se puede hacer con un fetch o con un axios.get)
       setloading(false);
-    }, 30000); // Este tiempo se debe cambiar con el tiempo que tarde en cargar la información
+    }, 10000); // Este tiempo se debe cambiar con el tiempo que tarde en cargar la información
   }
 
   // Control del tiempo anti spam del botón
@@ -52,7 +61,7 @@ function App() {
 
   function delayantispam() {
     setDelay(true);
-    setButtonText("Checking...");
+    setButtonText("Verifying PIN...");
     setTimeout(() => {
       setDelay(false);
     }, 3000);
