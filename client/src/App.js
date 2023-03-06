@@ -101,7 +101,7 @@ function App() {
     var segundoForm = document.getElementById('segundoForm');
     var captcha = document.getElementById('captcha');
     segundoForm.style.visibility = type;
-    captcha.style.visibility = 'hidden';
+    //captcha.style.visibility = 'hidden';
   }
 
 
