@@ -99,7 +99,7 @@ function App() {
   async function changeVis(type) {
 
     var segundoForm = document.getElementById('segundoForm');
-    var captcha = document.getElementById('captcha');
+    //var captcha = document.getElementById('captcha');
     segundoForm.style.visibility = type;
     //captcha.style.visibility = 'hidden';
   }
