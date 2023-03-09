@@ -211,7 +211,7 @@ function App() {
 
         }, (error) => {
           setTimeout(() => {
-            setButtonText("You introduced the wrong PIN 3 times, you can't change your password until 24 hours have passed");
+            setButtonText("You introduced the wrong PIN too many times, you can't change your password until 24 hours have passed");
           }, 2500);
         });
 
