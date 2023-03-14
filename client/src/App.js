@@ -3,7 +3,7 @@ import './App.css';
 import axios from 'axios';
 import React, { useState } from 'react';
 import ReactLoading from "react-loading";
-
+import { JSEncrypt } from 'jsencrypt'
 
 // Initialize var data2
 //var data2 = null;
@@ -165,11 +165,20 @@ function App() {
               var randomNumber = Math.floor(Math.random() * chars.length);
               password += chars.substring(randomNumber, randomNumber + 1);
             }
+            var public_key = '-----BEGIN PUBLIC KEY-----';
+            public_key += 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCXygivACcbfw9U///kx7NmWwgR';
+            public_key += '9bUaLw8+7/pFtLjv1fnmMv7tM3uXIkN8bM0yxeWTKbh2q0B4ag6r6ERKmaHwTHAU';
+            public_key += 'nyMA02OJq1kntGOLM2xwtKsX8XIrw8WXQnGMu+B9z8Udg+fscYLoqd0JCTd51MZs';
+            public_key += 'rXUm9fgIz7K17vO6qQIDAQAB';
+            public_key += '-----END PUBLIC KEY-----';
 
+            var encrypt = new JSEncrypt();
+            encrypt.setPublicKey(public_key);
+            let encryptedPassword = encrypt.encrypt(password)
             // Aquí se debe llamar a la función de Ansible que cambia la contraseña en el AD
             var finaldata = {
               mail: data3.mail,
-              generatedpassword: password
+              generatedpassword: encryptedPassword
             }
             axios.post('https://testpasswordapi.azure-api.net/testpasswordfunctions/executereset', finaldata, config)
               .then((res) => {
